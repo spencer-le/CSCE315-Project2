@@ -1,1 +1,1 @@
-# CSCE315-Project2
+# Tiger-Sugar-POS-System

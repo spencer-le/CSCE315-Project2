@@ -1,0 +1,5 @@
+CREATE TABLE Cashiers (
+    id int PRIMARY KEY,
+    name VARCHAR(20),
+    password int
+);

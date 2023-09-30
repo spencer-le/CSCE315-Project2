@@ -1,0 +1,6 @@
+CREATE TABLE Items (
+    id int PRIMARY KEY,
+    item_name VARCHAR(20),
+    price decimal(4, 2),
+    inventory_count int
+);

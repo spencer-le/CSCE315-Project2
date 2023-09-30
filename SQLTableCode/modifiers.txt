@@ -1,0 +1,6 @@
+CREATE TABLE Modifiers (
+    id int PRIMARY KEY,
+    modifier_name VARCHAR(20),
+    price decimal(4,2),
+    inventory_count int
+);

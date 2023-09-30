@@ -1,0 +1,6 @@
+CREATE TABLE Orders (
+    id int PRIMARY KEY,
+    customer_name VARCHAR(20),
+    order_date DATE NOT NULL,
+    total_cost decimal(5, 2)
+);

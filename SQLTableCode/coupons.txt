@@ -1,0 +1,6 @@
+CREATE TABLE Coupons (
+    id int PRIMARY KEY,
+    discount_amount decimal(4, 2),
+    start_date VARCHAR(20),
+    end_date VARCHAR(20)
+);

@@ -1,31 +1,33 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.ArrayList; //like a vector, used for storing csv tokens
 /*
-brainstorming
-Requirements:
-- 52 weeks
-- ~1 million in sales
-- 2 peak days in the first few weeks
-- 20 inventory items
-
-Strategy:
-Each week there are X people
-    - math.random(100,1000) people visiting
-Each person makes Y purchases
-    - math.random(1,5) items purchased per person
-Each purchase consists of
-    - drink_arr[ random index ] size 20
-    - ice_arr  [ random index ] size 3  [none, light ice, extra ice]
-    - sugar_arr[ random index ] size 3  [none, light sugar, extra sugar]
-
+brainstorming:
+Two methods of reading (via loop) in csv
+1. Line by line
+    Pros
+    - 1 line = 1 order
+    Cons
+    - Requires new line in makeCSV at the end of every person's order (easy, already there)
+2. every [num] elements
+    Pros
+    - Format given in lecture slides
+    Cons
+    - database changes could lead to mismatch of hardcoded [num] elements
  */
+
 public class CSVReader {
     public static void readCSV(String filePath) {
+        ArrayList<String> tokens = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
+                for (int i = 0; i < line.length(); i++) {
+
+                }
+                tokens.add(line.at)
+                //Use arraylist to split into tokens
                 // Process the line (e.g., split into fields, transform data)
                 // Insert data into the database
             }
@@ -33,17 +35,17 @@ public class CSVReader {
             e.printStackTrace();
         }
     }
-}
-
+    public static void readCSV2(String filePath){
         /*
-        System.out.println("Hello world!");
-        //parsing a csv file into Scanner class constructor
+        function based upon lecture slides
+         */
         Scanner sc = new Scanner(new File("F:\\CSVDemo.csv"));
         sc.useDelimiter(","); //sets the delimiter pattern
         while(sc.hasNext()){ //returns a boolean value
             System.out.print(sc.next()); //find and returns the next complete token from this scanner
         }
         sc.close(); //closes the scanner
-        */
     }
-            }
+
+}
+

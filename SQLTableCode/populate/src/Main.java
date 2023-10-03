@@ -10,7 +10,7 @@ public class Main {
         populator.populateInventoryItems();
 
         // TODO: Execute SQL queries here
-
+        makeCSV test = new makeCSV();
         connector.disconnect();
     }
 }

@@ -1,19 +1,16 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        DatabaseConnector connector = new DatabaseConnector();
+        connector.connect();
+
+        CSVReader.readCSV("path_to_csv_file.csv");
+
+        DataPopulator populator = new DataPopulator(connector.getConnection());
+        populator.populateSalesHistory();
+        populator.populateInventoryItems();
+
+        // TODO: Execute SQL queries here
+
+        connector.disconnect();
     }
 }
-
-//import java.io.*;
-//        import java.util.Scanner;
-//public class ReadCSVExample{
-//    public static void main(String[] args) throws Exception{
-//        //parsing a csv file into Scanner class constructor
-//        Scanner sc = new Scanner(new File("F:\\CSVDemo.csv"));
-//        sc.useDelimiter(","); //sets the delimiter pattern
-//        while(sc.hasNext()){ //returns a boolean value
-//            System.out.print(sc.next()); //find and returns the next complete token from this scanner
-//        }
-//        sc.close(); //closes the scanner
-//    }
-//}

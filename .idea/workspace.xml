@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8f8d12f-cf40-4e48-affb-a79ee743d6f6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SQLTableCode/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQLTableCode/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQLTableCode/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQLTableCode/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTableCode/populate.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/main/java/com/example/test/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/main/java/com/example/test/HelloApplication.java" afterDir="false" />
-    </list>
+    <list default="true" id="a8f8d12f-cf40-4e48-affb-a79ee743d6f6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,9 +13,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2WGlFbyb7NvnKOiFb7XvjgTBb1w" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,7 +27,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Sebastian/Desktop/Project2/The-Alley-POS-System",
+    "last_opened_file_path": "C:/Users/Sebastian/Desktop/Project2/The-Alley-POS-System/SQLTableCode/populate",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -47,6 +40,7 @@
       <option name="presentableId" value="Default" />
       <updated>1696366694268</updated>
       <workItem from="1696366695391" duration="57000" />
+      <workItem from="1696366873640" duration="76000" />
     </task>
     <servers />
   </component>

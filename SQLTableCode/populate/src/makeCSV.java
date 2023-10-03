@@ -17,19 +17,8 @@ Each purchase consists of
     - sugar_arr[ random index ] size 3  [none, light sugar, extra sugar]
 
  */
-/*
-try {
-      File myObj = new File("filename.txt");
-      if (myObj.createNewFile()) {
-        System.out.println("File created: " + myObj.getName());
-      } else {
-        System.out.println("File already exists.");
-      }
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
- */
+
+
 
 
 import java.io.File;
@@ -37,16 +26,16 @@ import java.io.IOException;
 public class makeCSV {
  // TODO: verify array indices and avoid "off by one" errors
     static void func(){
-        int[] drink_arr;
-        String[] ice_arr;
-        String[] sugar_arr;
+        String[] drink_arr = new String[0];
+        String[] ice_arr   = new String[0];
+        String[] sugar_arr = new String[0];
         int drink_ind = 0;
         int ice_ind = 0;
         int sugar_ind = 0;
         int weekly_customer_count = 0;
         int purchases = 0;
 
-        // creating & writing to file from w3schools
+        // creating a file [from w3schools]
         try {
             File myObj = new File("year_data.csv");
             if (myObj.createNewFile()) {
@@ -67,10 +56,19 @@ public class makeCSV {
                 purchases = math.random(1,5);
 
                 while(purchases > 0){
-                    drink_ind = math.random(0,19);
-                    ice_ind = math.random(0,2);
+                    drink_ind = math.random(0,19); //ints to access arrs at indices
+                    ice_ind   = math.random(0,2);
                     sugar_ind = math.random(0,2);
-
+                    try { // writing to a file [from w3schools]
+                        FileWriter myWriter = new FileWriter("year_data.csv");
+                        myWriter.write(
+                                "ID," + drink_arr[drink_ind] + "," + ice_arr[ice_ind] + "," +
+                                sugar_arr[sugar_ind] + ",");
+                        myWriter.close();
+                        System.out.println("Successfully wrote to the file.");
+                    } catch (IOException e) {
+                        System.out.println("An error occurred.");
+                    }
                     purchases--;
                 }
                 weekly_customer_count--;
@@ -81,7 +79,7 @@ public class makeCSV {
 }
 
 /*
-example csv
+example csv (for explanation purposes)
 int, double, string, string
 ID,  Total,  Drink,  Mods
 ID,  Total,  Drink,  Mods

@@ -76,12 +76,12 @@ public class makeCSV {
         for (int weeks = 0; weeks < 52; weeks++){
             weekly_customer_count = (int) (Math.random() * 901) + 100; //each week generates a random customer count
 
-            while(weekly_customer_count > 0){ //and for each customer
+            while(weekly_customer_count > 0){//and for each customer there are a random number of purchases.
+                // NOTE: inside this loop is an order
+                customer_purchases = (int) (Math.random() * 5) + 1;
 
-                //there are a random number of purchases
-                purchases = (int) (Math.random() * 5) + 1;
-
-                while(purchases > 0){
+                while(customer_purchases > 0){
+                    // NOTE: inside this loop is a single drink item
                     //ints to access arr items at indices
                     drink_ind = (int) (Math.random() * 20); // int between 0 and 19 (inclusive)
                     ice_ind = (int) (Math.random() * 3);    // Generates a random number between 0 and 2 (inclusive)
@@ -90,7 +90,7 @@ public class makeCSV {
                     try { // writing to a file [from w3schools]
                         FileWriter myWriter = new FileWriter("year_data.csv", true);//true for append mode
                         myWriter.write(
-                                purchase_id + "," + drink_arr[drink_ind] + "," + ice_arr[ice_ind] + "," +
+                                purchase_id + "," + weeks + "," + drink_arr[drink_ind] + "," + ice_arr[ice_ind] + "," +
                                 sugar_arr[sugar_ind] + ",\n");
                         myWriter.close();
 //                        System.out.println("Successfully wrote to the file."); //slow

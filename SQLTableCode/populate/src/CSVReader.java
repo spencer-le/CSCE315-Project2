@@ -23,14 +23,20 @@ public class CSVReader {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
+                String token = "";
                 for (int i = 0; i < line.length(); i++) {
-
+                    if(line.charAt(i) != ','){ //add each character until there's a comma
+                        token += line.charAt(i);
+                    }else{  //and then add that token to the arraylist & reset the individual token string
+                        tokens.add(token);
+                        token = "";
+                    }
                 }
-                tokens.add(line.at)
-                //Use arraylist to split into tokens
                 // Process the line (e.g., split into fields, transform data)
                 // Insert data into the database
             }
+            //by the end of this loop, the tokens arraylist has all the data in its indices
+            // with each element being a string such as ID, week, drink, ice amount, sugar amount
         } catch (IOException e) {
             e.printStackTrace();
         }

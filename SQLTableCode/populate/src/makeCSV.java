@@ -73,7 +73,7 @@ public class makeCSV {
 
 
 
-        for (int weeks = 0; weeks < 52; weeks++){
+        for (int weeks = 0; weeks < 365; weeks++){
             weekly_customer_count = (int) (Math.random() * 901) + 100; //each week generates a random customer count
 
             while(weekly_customer_count > 0){//and for each customer there are a random number of purchases.

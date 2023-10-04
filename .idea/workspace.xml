@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f8d12f-cf40-4e48-affb-a79ee743d6f6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/Modifier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/makeOrderCSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTableCode/populate/src/CSVReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/CSVReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTableCode/populate/src/DataPopulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/DataPopulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTableCode/populate/src/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/DatabaseConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTableCode/populate/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTableCode/populate/src/makeCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/makeCSV.java" afterDir="false" />
-    </list>
+    <list default="true" id="a8f8d12f-cf40-4e48-affb-a79ee743d6f6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

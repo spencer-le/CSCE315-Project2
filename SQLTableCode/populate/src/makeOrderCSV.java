@@ -48,6 +48,7 @@ public class makeOrderCSV {
                 }
 
                 myWriter = new FileWriter("order_year_data.csv", true); // true for append mode
+                myWriter.write("id, customer_name, order_date, total_cost, hour, \n");
             } catch (IOException e) {
                 System.out.println("An error occurred.");
             }
@@ -61,12 +62,13 @@ public class makeOrderCSV {
 
                     //there are a random number of purchases
                     customer_purchases = (int) (Math.random() * 6) + 1;
+                    int hour = (int) (Math.random() * 11) + 11;
 
                     while (customer_purchases > 0) {
                         totalCost = customer_purchases * 5; // Items will have different prices later
                         try {
                             myWriter.write(
-                                    orderNumber + ",Person " + customerName + "," + date + "," + totalCost + "," + ",\n");
+                                    orderNumber + ",Person " + customerName + "," + date + "," + totalCost + "," + hour + "\n");
                             // Don't close the FileWriter here
                         } catch (IOException e) {
                             System.out.println("An error occurred.");

@@ -1,0 +1,77 @@
+1) 52 Weeks of Sales History: select count of orders grouped by week.
+    (count_of_each_week.sql)
+    SELECT
+        CEIL(order_date / 7) AS week_number,
+        COUNT(*) AS order_count
+    FROM orders
+    GROUP BY CEIL(order_date / 7)
+    ORDER BY week_number;
+
+2) Realistic Sales History: select count of orders, sum of order total grouped by hour.
+    (sales_history_by_hour.sql)
+    SELECT
+        hours,
+        COUNT(*) AS order_count,
+        SUM(total_cost) AS total_order_amount
+    FROM orders
+    GROUP BY hours
+    ORDER BY hours;
+
+3) 2 Peak Days: select top 10 sums of order total grouped by day in descending order.
+    (top_10.sql)
+    SELECT
+        order_date,
+        SUM(total_cost) AS total_order_amount
+    FROM orders
+    GROUP BY order_date
+    ORDER BY total_order_amount DESC
+    LIMIT 10;
+
+4) 20 Items in Inventory: select row count from inventory.
+    "20 items in inventory"
+    (inventory.sql)
+    SELECT count(id) FROM items
+
+5) "all inventory items with less than 100 units remaining"
+(less_than_100.sql)
+SELECT item_name, inventory_count FROM items WHERE inventory_count < 100;
+
+6) "all inventory items with less than 200 units remaining"
+(less_than_200.sql)
+SELECT item_name, inventory_count FROM items WHERE inventory_count < 200;
+
+7) "all inventory items with less than 300 units remaining"
+(less_than_200.sql)
+SELECT item_name, inventory_count FROM items WHERE inventory_count < 300;
+
+8) "all orders under ten dollars"
+(single_digit_orders.sql)
+SELECT customer_name, total_cost FROM orders WHERE total_cost < 10.00;
+
+9) "all orders under twenty dollars"
+(orders_under_twenty.sql)
+SELECT customer_name, total_cost FROM orders WHERE total_cost < 20.00;
+
+10) "all orders under thirty dollars"
+(orders_under_thirty.sql)
+SELECT customer_name, total_cost FROM orders WHERE total_cost < 30.00;
+
+11) "all orders from day 10"
+(day_ten_orders.sql)
+SELECT customer name, total_cost FROM orders WHERE order_date == 11;
+
+12) "all orders from day 100"
+(day_100_orders.sql)
+SELECT customer name, total_cost FROM orders WHERE order_date == 101;
+
+13) "all orders from day 200"
+(day_200_orders.sql)
+SELECT customer name, total_cost FROM orders WHERE order_date == 201;
+
+14) "all orders from day 300"
+(day_300_orders.sql)
+SELECT customer name, total_cost FROM orders WHERE order_date == 301;
+
+15) "all orders from day 365"
+(day_365_orders.sql)
+SELECT customer name, total_cost FROM orders WHERE order_date == 366;

@@ -10,7 +10,7 @@ public class Main {
 //        populator.populateInventoryItems();
 
         // TODO: Execute SQL queries here
-//        makeOrderCSV test = new makeOrderCSV(); USED TO MAKE ORDERS OF 365 DAYS DONT RERUN
+        makeOrderCSV test = new makeOrderCSV(); // USED TO MAKE ORDERS OF 365 DAYS DONT RERUN
 //        connector.disconnect();
     }
 }

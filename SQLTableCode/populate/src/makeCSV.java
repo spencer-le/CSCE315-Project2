@@ -32,11 +32,7 @@ public class makeCSV {
         func();
     }
     static void func(){
-        //the arrays store all options for ordering a drink + modifiers
-        // the ind variables will store random indices for custom drinks
-        String[] drink_arr = {"Drink1", "Drink2", "Drink3", "Drink4", "Drink5", "Drink6",
-                "Drink7", "Drink8", "Drink9", "Drink10", "Drink11", "Drink12", "Drink13",
-                "Drink14", "Drink15", "Drink16", "Drink17", "Drink18", "Drink19", "Drink20" };
+        String[] drink_arr = new String[20];
         String[] ice_arr   = {"light ice", "regular ice", "extra ice"};
         String[] sugar_arr = {"light sugar", "regular sugar", "extra sugar"};
         int drink_ind = 0;
@@ -45,12 +41,13 @@ public class makeCSV {
         int weekly_customer_count = 0;
         int customer_purchases = 0;
         int purchase_id = 0;
-
+        FileWriter myWriter = null;
 
         //initialize Drink names:
         for (int i = 0; i < 20; i++) {
             drink_arr[i] = "Drink" + i;
         }
+
 
         // creating a file [from w3schools]
         try {
@@ -68,10 +65,13 @@ public class makeCSV {
             } else {
                 System.out.println("Failed to create file");
             }
+
+            myWriter = new FileWriter("year_data.csv", true); // true for append mode
         } catch (IOException e) {
             System.out.println("An error occurred.");
-            //e.printStackTrace(); this was from w3schools, but IDE says its not robust enough
         }
+
+
 
         for (int weeks = 0; weeks < 52; weeks++){
             weekly_customer_count = (int) (Math.random() * 901) + 100; //each week generates a random customer count
@@ -80,20 +80,20 @@ public class makeCSV {
                 // NOTE: inside this loop is an order
                 customer_purchases = (int) (Math.random() * 5) + 1;
 
+                //there are a random number of purchases
+                customer_purchases = (int) (Math.random() * 5) + 1;
+
                 while(customer_purchases > 0){
-                    // NOTE: inside this loop is a single drink item
                     //ints to access arr items at indices
                     drink_ind = (int) (Math.random() * 20); // int between 0 and 19 (inclusive)
                     ice_ind = (int) (Math.random() * 3);    // Generates a random number between 0 and 2 (inclusive)
                     sugar_ind = (int) (Math.random() * 3);  // Generates a random number between 0 and 2 (inclusive)
 
-                    try { // writing to a file [from w3schools]
-                        FileWriter myWriter = new FileWriter("year_data.csv", true);//true for append mode
+                    try {
                         myWriter.write(
                                 purchase_id + "," + weeks + "," + drink_arr[drink_ind] + "," + ice_arr[ice_ind] + "," +
-                                sugar_arr[sugar_ind] + ",\n");
-                        myWriter.close();
-//                        System.out.println("Successfully wrote to the file."); //slow
+                                        sugar_arr[sugar_ind] + ",\n");
+                        // Don't close the FileWriter here
                     } catch (IOException e) {
                         System.out.println("An error occurred.");
                     }
@@ -102,6 +102,11 @@ public class makeCSV {
                 }
                 weekly_customer_count--;
             }
+        }
+        try {
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred while closing the file.");
         }
     }
 

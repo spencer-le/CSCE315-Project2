@@ -9,26 +9,13 @@ public class makeOrderCSV {
             func();
         }
         static void func() {
-//            String[] drink_arr = new String[20];
-//            String[] ice_arr = {"light ice", "regular ice", "extra ice"};
-//            String[] sugar_arr = {"light sugar", "regular sugar", "extra sugar"};
-//            int drink_ind = 0;
-//            int ice_ind = 0;
-//            int sugar_ind = 0;
             int orderNumber = 1;
             int customerName = 1;
             int date = 1;
             float totalCost = 0;
             int day_customer_count = 0;
             int customer_purchases = 0;
-//            int purchase_id = 0;
             FileWriter myWriter = null;
-
-            //initialize Drink names:
-//            for (int i = 0; i < 20; i++) {
-//                drink_arr[i] = "Drink" + i;
-//            }
-
 
             // creating a file [from w3schools]
             try {
@@ -55,7 +42,11 @@ public class makeOrderCSV {
 
 
             for (int days = 0; days < 365; days++) {
-                day_customer_count = (int) (Math.random() * 100) + 20; //each week generates a random customer count
+                if (days == 120 || days == 303) {
+                    day_customer_count = 200;
+                } else {
+                    day_customer_count = (int) (Math.random() * 100) + 20;
+                }
 
                 while (day_customer_count > 0) {//and for each customer there are a random number of purchases.
                     // NOTE: inside this loop is an order

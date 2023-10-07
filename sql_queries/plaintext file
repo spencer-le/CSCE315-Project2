@@ -36,42 +36,51 @@
 (less_than_100.sql)
 SELECT item_name, inventory_count FROM items WHERE inventory_count < 100;
 
-6) "all inventory items with less than 200 units remaining"
-(less_than_200.sql)
-SELECT item_name, inventory_count FROM items WHERE inventory_count < 200;
-
-7) "all inventory items with less than 300 units remaining"
-(less_than_200.sql)
-SELECT item_name, inventory_count FROM items WHERE inventory_count < 300;
-
-8) "all orders under ten dollars"
-(single_digit_orders.sql)
-SELECT customer_name, total_cost FROM orders WHERE total_cost < 10.00;
+6) "grab all items that end with tea"
+    (tea_items.sql)
+    select * from items where item_name like '%Tea';
+7) "grab anything that is a latte or lulu"
+    (latte_or_lulu_items.sql)
+    select * from items where item_name like '%Latte' or item_name like '%Lulu';
+8) "grabs items with lowest inventory"
+    (low_inventory_items.sql)
+    select * from items order by inventory_count;
 
 9) "all orders under twenty dollars"
 (orders_under_twenty.sql)
 SELECT customer_name, total_cost FROM orders WHERE total_cost < 20.00;
 
-10) "all orders under thirty dollars"
-(orders_under_thirty.sql)
-SELECT customer_name, total_cost FROM orders WHERE total_cost < 30.00;
+10) "sales by customer"
+    (sales_by_customer.sql)
+    SELECT customer_name, SUM(total_cost) AS total_sales
+    FROM orders
+    GROUP BY customer_name;
 
-11) "all orders from day 10"
-(day_ten_orders.sql)
-SELECT customer name, total_cost FROM orders WHERE order_date == 11;
+11) "grab the top ten expensive orders"
+    (most_expensive_orders.sql)
+    select * from orders order by total_cost desc limit 10;
 
-12) "all orders from day 100"
-(day_100_orders.sql)
-SELECT customer name, total_cost FROM orders WHERE order_date == 101;
+12) "grab the top 5 most expensive orders from day 150"
+    "most_expensive_order_from_day.sql"
+    select * from orders where order_date = 150 order by total_cost limit 5;
 
 13) "all orders from day 200"
 (day_200_orders.sql)
-SELECT customer name, total_cost FROM orders WHERE order_date == 201;
+SELECT customer_name, total_cost FROM orders WHERE order_date = 200;
 
-14) "all orders from day 300"
-(day_300_orders.sql)
-SELECT customer name, total_cost FROM orders WHERE order_date == 301;
+14) "average order value"
+    (avg_order_value.sql)
+    SELECT AVG(total_cost) AS avg_order_value
+    FROM orders;
+    items in stock:
 
-15) "all orders from day 365"
-(day_365_orders.sql)
-SELECT customer name, total_cost FROM orders WHERE order_date == 366;
+
+15) "gets the most popular hours by total revenue"
+    (total_revenue_in_each_hour.sql)
+    SELECT hours, SUM(total_cost) AS total_sales
+    FROM orders
+    GROUP BY hours;
+
+16) "gets the most popular hours of the day by customers"
+    (most_popular_hour_by_customers.sql)
+    select hours from orders group by hours order by count(*) desc limit 5;

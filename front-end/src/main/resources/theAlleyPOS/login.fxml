@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="theAlleyPOS.loginController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="file:/C:/Users/Sebastian/Desktop/Project2/The-Alley-POS-System/front-end/src/main/java/theAlleyPOS/images/theAlleyLogo.png" />
+      </image>
+   </ImageView>
+
+  <Label fx:id="welcomeText" />
+  <Button onAction="#onHelloButtonClick" text="Hello!" />
+</VBox>

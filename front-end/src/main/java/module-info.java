@@ -3,6 +3,6 @@ module com.example.test {
     requires javafx.fxml;
 
 
-    opens com.example.test to javafx.fxml;
-    exports com.example.test;
+    opens theAlleyPOS to javafx.fxml;
+    exports theAlleyPOS;
 }

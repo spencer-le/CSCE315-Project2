@@ -1,14 +1,18 @@
 package theAlleyPOS;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
 
 public class loginController {
     @FXML
-    private Label welcomeText;
+    private TextField employeeID;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    public void initialize() {
+    }
+
+    @FXML
+    public void handleLogin(ActionEvent actionEvent) {
     }
 }

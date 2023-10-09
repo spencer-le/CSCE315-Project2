@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class loginController {
+public class LoginController {
 
     @FXML
     private TextField employeeID;
@@ -26,7 +26,7 @@ public class loginController {
 
         // After validation, switch to next screen:
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/employeeTimeClock.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/EmployeeTimeClock.fxml"));
             Scene anotherScene = new Scene(fxmlLoader.load());
 
             // Getting the current stage

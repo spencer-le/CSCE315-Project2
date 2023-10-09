@@ -5,4 +5,6 @@ module com.example.test {
 
     opens theAlleyPOS to javafx.fxml;
     exports theAlleyPOS;
+    exports theAlleyPOS.controller;
+    opens theAlleyPOS.controller to javafx.fxml;
 }

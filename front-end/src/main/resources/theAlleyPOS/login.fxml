@@ -37,61 +37,61 @@
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
-         <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="1" textFill="WHITE" GridPane.halignment="CENTER">
+         <Button fx:id="oneButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="1" textFill="WHITE" GridPane.halignment="CENTER">
             <font>
                <Font size="24.0" />
             </font></Button>
-         <Button layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="2" textFill="WHITE" GridPane.columnIndex="1">
+         <Button fx:id="twoButton" layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="2" textFill="WHITE" GridPane.columnIndex="1">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="160.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="3" textFill="WHITE" GridPane.columnIndex="2">
+         <Button fx:id="threeButton" layoutX="160.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="3" textFill="WHITE" GridPane.columnIndex="2">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="310.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="4" textFill="WHITE" GridPane.rowIndex="1">
+         <Button fx:id="fourButton" layoutX="310.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="4" textFill="WHITE" GridPane.rowIndex="1">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="10.0" layoutY="56.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="5" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <Button fx:id="fiveButton" layoutX="10.0" layoutY="56.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="5" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="6" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <Button fx:id="sixButton" layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="6" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="310.0" layoutY="56.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="7" textFill="WHITE" GridPane.rowIndex="2">
+         <Button fx:id="sevenButton" layoutX="310.0" layoutY="56.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="7" textFill="WHITE" GridPane.rowIndex="2">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="10.0" layoutY="104.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="8" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <Button fx:id="eightButton" layoutX="10.0" layoutY="104.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="8" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="160.0" layoutY="104.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="9" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <Button fx:id="nineButton" layoutX="160.0" layoutY="104.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="9" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="310.0" layoutY="104.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <Button fx:id="zeroButton" layoutX="310.0" layoutY="104.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="160.0" layoutY="151.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="Del" textFill="WHITE" GridPane.rowIndex="3">
+         <Button fx:id="deleteButton" layoutX="160.0" layoutY="151.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="Del" textFill="WHITE" GridPane.rowIndex="3">
             <font>
                <Font size="24.0" />
             </font>
          </Button>
-         <Button layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="1" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <Button fx:id="enterButton" layoutX="10.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleNumberButton" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #414041;" text="Enter" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3">
             <font>
                <Font size="24.0" />
             </font>

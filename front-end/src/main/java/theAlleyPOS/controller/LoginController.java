@@ -11,7 +11,40 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController {
+    // "jdbc:postgresql://csce-315-db.engr.tamu.edu/sthomas_demo" demo url
+    // "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db" probably our url...
+    //Building the connection
+    Connection conn = null;
+     try {
+        //Class.forName("org.postgresql.Driver");
+        conn = DriverManager.getConnection(
+                "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db",
+                "csce315_909_gshields432", "password");
+        //TODO: ensure that plaintext isn't in the user/pass. maybe put in another file?
+        // can we make a new user on the db that just has read-only access to login info and that way
+        // we dont have to use one of our login's for this?
+    } catch (Exception e) {
+        e.printStackTrace();
+        System.exit(0);
+    }//end try catch
+    try{
+        //create a statement object
+        Statement stmt = conn.createStatement();
+        //create an SQL statement
+        String sqlStatement = "SELECT name FROM cashiers"; //test statement to ensure connection works
+        //send statement to DBMS
+        ResultSet result = stmt.executeQuery(sqlStatement);
 
+        //OUTPUT
+        System.out.println("Select Names from Cashier Table");
+        System.out.println("______________________________________");
+        while (result.next()) {
+            System.out.println(result.getString("name"));
+        }
+    } catch (Exception e){
+        System.out.println("Error accessing Database.");
+    }
+     System.out.println("Opened database successfully");
     private boolean IsValidID(int ID){
 
     }
@@ -27,11 +60,11 @@ public class LoginController {
     public void handleLogin(ActionEvent actionEvent) {
         // TODO: Handle login (Put logic here to process the entered ID)
         /*brainstorming:
-            Each employee (managers & cashiers) has an ID in the database.
-                Each ID should be 5 digits long (as opposed to 0,1,2... with default ID's)
-            The 5 digit code entered into the LoginController is used to search for a match in the DB
-
-            if(ID is valid)
+            if(!IsValidID(int id)){ //if the id is NOT VALID
+                clear entry
+                display error text
+                break/dont proceed
+            }
         */
 
         // After validation, switch to next screen:

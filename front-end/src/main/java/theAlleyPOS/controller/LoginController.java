@@ -12,6 +12,9 @@ import java.io.IOException;
 
 public class LoginController {
 
+    private boolean IsValidID(int ID){
+
+    }
     @FXML
     private TextField employeeID;
 
@@ -23,6 +26,13 @@ public class LoginController {
     @FXML
     public void handleLogin(ActionEvent actionEvent) {
         // TODO: Handle login (Put logic here to process the entered ID)
+        /*brainstorming:
+            Each employee (managers & cashiers) has an ID in the database.
+                Each ID should be 5 digits long (as opposed to 0,1,2... with default ID's)
+            The 5 digit code entered into the LoginController is used to search for a match in the DB
+
+            if(ID is valid)
+        */
 
         // After validation, switch to next screen:
         try {

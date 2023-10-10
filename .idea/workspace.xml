@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8f8d12f-cf40-4e48-affb-a79ee743d6f6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/The-Alley-POS-System.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/The-Alley-POS-System.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SQLTableCode/populate/order_year_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTableCode/populate/order_year_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTableCode/populate/src/makeOrderCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTableCode/populate/src/makeOrderCSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql_queries/plaintext file" beforeDir="false" afterPath="$PROJECT_DIR$/sql_queries/plaintext file" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/main/java/theAlleyPOS/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/main/java/theAlleyPOS/controller/LoginController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,20 +30,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sebastian/Desktop/Project2/The-Alley-POS-System/SQLTableCode/populate&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Sebastian/Desktop/Project2/The-Alley-POS-System/SQLTableCode/populate",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -58,6 +62,7 @@
       <workItem from="1696533623499" duration="28000" />
       <workItem from="1696537627881" duration="2170000" />
       <workItem from="1696632763256" duration="1517000" />
+      <workItem from="1696952674739" duration="3001000" />
     </task>
     <servers />
   </component>

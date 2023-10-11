@@ -3,7 +3,6 @@ module com.example.test {
     requires javafx.fxml;
     requires java.sql;
 
-
     opens theAlleyPOS to javafx.fxml;
     exports theAlleyPOS;
     exports theAlleyPOS.controller;

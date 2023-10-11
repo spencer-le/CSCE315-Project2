@@ -14,11 +14,10 @@ import java.sql.Statement;
 import java.sql.Connection;
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.Objects;
 
 public class LoginController {
-    // "jdbc:postgresql://csce-315-db.engr.tamu.edu/sthomas_demo" demo url
-    // "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db" probably our url...
 
     private boolean IsValidID(String ID){
         //Building the connection
@@ -69,11 +68,17 @@ public class LoginController {
             deleteButton, enterButton;
 
     @FXML
+    private static final String DB_URL = "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db";
+    private static final String USER = "csce315_909_roshantayab";
+    private static final String PASS = "password";
+
     public void handleLogin(ActionEvent actionEvent) {
         if(!IsValidID(employeeID.getText())){
             employeeID.setText("------");
 
-        }
+            if(ID is valid)
+        */
+
         // After validation, switch to next screen:
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/EmployeeTimeClock.fxml"));

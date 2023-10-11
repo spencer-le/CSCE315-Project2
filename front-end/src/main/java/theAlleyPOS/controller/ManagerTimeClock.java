@@ -65,7 +65,7 @@ public class ManagerTimeClock {
 
     @FXML
     public void handleManagerInventoryAction(ActionEvent actionEvent) {
-        // TODO: Will be made right now
+        loadInventoryScreen(actionEvent);
     }
 
     @FXML
@@ -100,7 +100,23 @@ public class ManagerTimeClock {
             // Set the scene to the stage
             currentStage.setScene(loginScene);
         } catch (IOException e) {
-            System.out.println("Failed to load login screen.");
+            System.out.println("Failed to load item selection screen.");
+            e.printStackTrace();
+        }
+    }
+
+    private void loadInventoryScreen(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/Inventory.fxml"));
+            Scene loginScene = new Scene(fxmlLoader.load());
+
+            // Get the current stage using any of the controls
+            Stage currentStage = (Stage) managerInventoryButton.getScene().getWindow();
+
+            // Set the scene to the stage
+            currentStage.setScene(loginScene);
+        } catch (IOException e) {
+            System.out.println("Failed to load inventory screen.");
             e.printStackTrace();
         }
     }

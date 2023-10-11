@@ -80,7 +80,7 @@ public class CashierTimeClockController {
             // Set the scene to the stage
             currentStage.setScene(loginScene);
         } catch (IOException e) {
-            System.out.println("Failed to load login screen.");
+            System.out.println("Failed to load item selection screen.");
             e.printStackTrace();
         }
     }

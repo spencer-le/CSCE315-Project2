@@ -12,7 +12,7 @@
   </padding>
    <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="file:/C:/Users/Sebastian/Desktop/Project2/The-Alley-POS-System/front-end/src/main/java/theAlleyPOS/images/theAlleyLogo.png" />
+         <Image url="@../../java/theAlleyPOS/images/theAlleyLogo.png" />
       </image>
    </ImageView>
    <Label text="Enter Employee ID" textFill="WHITE">

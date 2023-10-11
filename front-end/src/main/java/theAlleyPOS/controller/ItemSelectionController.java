@@ -187,7 +187,7 @@ public class ItemSelectionController {
             // Switching scene
             currentStage.setScene(anotherScene);
         } catch (IOException e) {
-            System.out.println("Failed to load another screen.");
+            System.out.println("Failed to load employee time clock screen.");
             e.printStackTrace();
         }
     }
@@ -203,7 +203,7 @@ public class ItemSelectionController {
             // Switching scene
             currentStage.setScene(anotherScene);
         } catch (IOException e) {
-            System.out.println("Failed to load another screen.");
+            System.out.println("Failed to load manager time clock screen.");
             e.printStackTrace();
         }
     }

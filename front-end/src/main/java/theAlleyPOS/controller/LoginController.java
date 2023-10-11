@@ -13,45 +13,22 @@ import java.io.IOException;
 public class LoginController {
     // "jdbc:postgresql://csce-315-db.engr.tamu.edu/sthomas_demo" demo url
     // "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db" probably our url...
-    //Building the connection
-    Connection conn = null;
-     try {
-        //Class.forName("org.postgresql.Driver");
-        conn = DriverManager.getConnection(
-                "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db",
-                "csce315_909_gshields432", "password");
-        //TODO: ensure that plaintext isn't in the user/pass. maybe put in another file?
-        // can we make a new user on the db that just has read-only access to login info and that way
-        // we dont have to use one of our login's for this?
-    } catch (Exception e) {
-        e.printStackTrace();
-        System.exit(0);
-    }//end try catch
-    try{
-        //create a statement object
-        Statement stmt = conn.createStatement();
-        //create an SQL statement
-        String sqlStatement = "SELECT name FROM cashiers"; //test statement to ensure connection works
-        //send statement to DBMS
-        ResultSet result = stmt.executeQuery(sqlStatement);
 
-        //OUTPUT
-        System.out.println("Select Names from Cashier Table");
-        System.out.println("______________________________________");
-        while (result.next()) {
-            System.out.println(result.getString("name"));
-        }
-    } catch (Exception e){
-        System.out.println("Error accessing Database.");
-    }
-     System.out.println("Opened database successfully");
-    try {
-        conn.close();
-        System.out.println("Connection Closed.");
-    } catch(Exception e) {
-        System.out.println("Connection NOT Closed.");
-    }//end try catch
     private boolean IsValidID(String ID){
+        //Building the connection
+        Connection conn = null;
+        try {
+            //Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection(
+                    "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db",
+                    "csce315_909_gshields432", "password");
+            //TODO: ensure that plaintext isn't in the user/pass. maybe put in another file?
+            // can we make a new user on the db that just has read-only access to login info and that way
+            // we dont have to use one of our login's for this?
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
         try{
             //create a statement object
             Statement stmt = conn.createStatement();
@@ -59,13 +36,17 @@ public class LoginController {
             String sqlStatement = "SELECT password FROM cashiers"; //test statement to ensure connection works
             //send statement to DBMS
             ResultSet result = stmt.executeQuery(sqlStatement);
-
+            try {
+                conn.close();
+                System.out.println("Connection Closed.");
+            } catch(Exception e) {
+                System.out.println("Connection NOT Closed.");
+            }//end try catch
             //OUTPUT
             while (result.next()) {
                 if(result.getString("password") == ID){ // if ID matches a password (employeeID)
                     return true;
                 }
-                System.out.println(result.getString("name"));
             }
             return false;
         } catch (Exception e){
@@ -93,9 +74,15 @@ public class LoginController {
             }
         */
         if(!IsValidID(employeeID)){
-            employeeID = "-----";
-        }
+            employeeID = "------";
 
+        }
+        try { // we can close the connection to the database. Login no longer needs it.
+            conn.close();
+            System.out.println("Connection Closed.");
+        } catch(Exception e) {
+            System.out.println("Connection NOT Closed.");
+        }//end try catch
         // After validation, switch to next screen:
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/EmployeeTimeClock.fxml"));
@@ -106,10 +93,12 @@ public class LoginController {
 
             // Switching scene
             currentStage.setScene(anotherScene);
+
         } catch (IOException e) {
             System.out.println("Failed to load another screen.");
             e.printStackTrace();
         }
+
     }
 
     @FXML

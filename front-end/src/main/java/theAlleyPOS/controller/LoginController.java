@@ -13,7 +13,7 @@ import java.io.IOException;
 public class LoginController {
 
     private boolean IsValidID(int ID){
-
+        return true;
     }
     @FXML
     private TextField employeeID;

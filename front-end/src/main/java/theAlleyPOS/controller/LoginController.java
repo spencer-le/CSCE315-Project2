@@ -45,6 +45,12 @@ public class LoginController {
         System.out.println("Error accessing Database.");
     }
      System.out.println("Opened database successfully");
+    try {
+        conn.close();
+        System.out.println("Connection Closed.");
+    } catch(Exception e) {
+        System.out.println("Connection NOT Closed.");
+    }//end try catch
     private boolean IsValidID(String ID){
         try{
             //create a statement object
@@ -87,7 +93,7 @@ public class LoginController {
             }
         */
         if(!IsValidID(employeeID)){
-            employeeID = "-----"
+            employeeID = "-----";
         }
 
         // After validation, switch to next screen:

@@ -20,7 +20,7 @@
          <Font size="48.0" />
       </font>
    </Label>
-   <TextField fx:id="employeeID" alignment="CENTER" maxHeight="60.0" maxWidth="400.0" minHeight="60.0" minWidth="400.0" onAction="#handleLogin" prefHeight="60.0" prefWidth="400.0" text="------">
+   <TextField fx:id="employeeID" alignment="CENTER" maxHeight="60.0" maxWidth="400.0" minHeight="60.0" minWidth="400.0" onAction="#handleLogin" prefHeight="60.0" prefWidth="400.0" text="----">
       <font>
          <Font size="36.0" />
       </font></TextField>

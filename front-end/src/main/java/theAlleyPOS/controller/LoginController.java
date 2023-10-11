@@ -7,58 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.Connection;
+import theAlleyPOS.model.Session;
+import theAlleyPOS.model.UserRole;
 
 import java.io.IOException;
-import java.sql.*;
-import java.util.Objects;
 
 public class LoginController {
-    @FXML
-    private static final String DB_URL = "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db";
-    private static final String USER = "csce315_909_roshantayab";
-    private static final String PASS = "password";
-    private boolean IsValidID(String ID){
-        //Building the connection
-        Connection conn = null;
-        try {
-            //Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection(
-                    DB_URL,
-                    USER, PASS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-        try{
-            //create a statement object
-            Statement stmt = conn.createStatement();
-            //create an SQL statement
-            String sqlStatement = "SELECT password FROM cashiers"; //test statement to ensure connection works
-            //send statement to DBMS
-            ResultSet result = stmt.executeQuery(sqlStatement);
-            try {
-                conn.close(); //connection can be closed. all required data has been accessed.
-                System.out.println("Connection Closed.");
-            } catch(Exception e) {
-                System.out.println("Connection NOT Closed.");
-            }
-            //OUTPUT
-            while (result.next()) {
-                if(Objects.equals(result.getString("password"), ID)){ // if ID matches a password (employeeID)
-                    return true;
-                }
-            }
-            return false;
-        } catch (Exception e){
-            System.out.println("Error accessing Database.");
-            return false;
-        }
-    }
     @FXML
     private TextField employeeID;
 
@@ -67,26 +21,29 @@ public class LoginController {
             sixButton, sevenButton, eightButton, nineButton, zeroButton,
             deleteButton, enterButton;
 
-
-
     public void handleLogin(ActionEvent actionEvent) {
-        if(!IsValidID(employeeID.getText())) {
-            employeeID.setText("------");
+        String input = employeeID.getText();
+
+        // Check for valid input length
+        if (input == null || input.length() != 4 || input.equals("----")) {
+            employeeID.setText("----");
+            System.out.println("Invalid input length! Try again.");
+            return; // Exit early
         }
 
-        // After validation, switch to next screen:
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/EmployeeTimeClock.fxml"));
-            Scene anotherScene = new Scene(fxmlLoader.load());
+        theAlleyPOS.DatabaseHelper dbHelper = new theAlleyPOS.DatabaseHelper();
 
-            // Getting the current stage
-            Stage currentStage = (Stage) employeeID.getScene().getWindow();
+        UserRole role = dbHelper.validateUser(input);
 
-            // Switching scene
-            currentStage.setScene(anotherScene);
-        } catch (IOException e) {
-            System.out.println("Failed to load another screen.");
-            e.printStackTrace();
+        if (role == UserRole.MANAGER) {
+            Session.setManager(true);
+            loadManagerTimeClockScreen(actionEvent);
+        } else if (role == UserRole.EMPLOYEE) {
+            Session.setManager(false);
+            loadEmployeeTimeClockScreen(actionEvent);
+        } else {
+            employeeID.setText("----");
+            System.out.println("Incorrect Input! Try again.");
         }
     }
 
@@ -110,11 +67,43 @@ public class LoginController {
 
             default:
                 // Append the number to the TextField
-                if(employeeID.getText().equals("------")) {
+                if(employeeID.getText().equals("----")) {
                     employeeID.setText(""); // Clear placeholder if it's the default
                 }
                 employeeID.appendText(buttonText);
                 break;
+        }
+    }
+
+    private void loadEmployeeTimeClockScreen(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/CashierTimeClock.fxml"));
+            Scene anotherScene = new Scene(fxmlLoader.load());
+
+            // Getting the current stage
+            Stage currentStage = (Stage) employeeID.getScene().getWindow();
+
+            // Switching scene
+            currentStage.setScene(anotherScene);
+        } catch (IOException e) {
+            System.out.println("Failed to load another screen.");
+            e.printStackTrace();
+        }
+    }
+
+    private void loadManagerTimeClockScreen(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/ManagerTimeClock.fxml"));
+            Scene anotherScene = new Scene(fxmlLoader.load());
+
+            // Getting the current stage
+            Stage currentStage = (Stage) employeeID.getScene().getWindow();
+
+            // Switching scene
+            currentStage.setScene(anotherScene);
+        } catch (IOException e) {
+            System.out.println("Failed to load another screen.");
+            e.printStackTrace();
         }
     }
 }

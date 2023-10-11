@@ -1,20 +1,30 @@
 package theAlleyPOS.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
-public class EmployeeTimeClockController {
+public class ManagerTimeClock {
+    @FXML
+    private Button managerClockInButton;
+    @FXML
+    private Button managerBreakInButton;
+    @FXML
+    private Button managerClockOutButton;
+    @FXML
+    private Button managerBreakOutButton;
+    @FXML
+    private Button managerInventoryButton;
+    @FXML
+    private Button managerAnalyticsButton;
 
     @FXML
-    private Button clockInButton, breakInButton, clockOutButton, breakOutButton;
-
-    @FXML
-    public void handleClockInOut(ActionEvent actionEvent) {
+    public void handleManagerClockInOut(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getSource();
         String buttonText = clickedButton.getText();
 
@@ -34,7 +44,7 @@ public class EmployeeTimeClockController {
     }
 
     @FXML
-    public void handleBreakInOut(ActionEvent actionEvent) {
+    public void handleManagerBreakInOut(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getSource();
         String buttonText = clickedButton.getText();
 
@@ -53,13 +63,23 @@ public class EmployeeTimeClockController {
         }
     }
 
+    @FXML
+    public void handleManagerInventoryAction(ActionEvent actionEvent) {
+        // TODO: Will be made right now
+    }
+
+    @FXML
+    public void handleManagerAnalyticsAction(ActionEvent actionEvent) {
+        // TODO: Will be made during phase 4
+    }
+
     private void loadLoginScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/Login.fxml"));
             Scene loginScene = new Scene(fxmlLoader.load());
 
             // Get the current stage using any of the controls
-            Stage currentStage = (Stage) clockInButton.getScene().getWindow();
+            Stage currentStage = (Stage) managerClockInButton.getScene().getWindow();
 
             // Set the scene to the stage
             currentStage.setScene(loginScene);
@@ -75,7 +95,7 @@ public class EmployeeTimeClockController {
             Scene loginScene = new Scene(fxmlLoader.load());
 
             // Get the current stage using any of the controls
-            Stage currentStage = (Stage) clockInButton.getScene().getWindow();
+            Stage currentStage = (Stage) managerClockInButton.getScene().getWindow();
 
             // Set the scene to the stage
             currentStage.setScene(loginScene);

@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8f8d12f-cf40-4e48-affb-a79ee743d6f6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/The-Alley-POS-System.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/The-Alley-POS-System.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQLTableCode/populate/order_year_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/SQLTableCode/populate/order_year_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/main/java/theAlleyPOS/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/main/java/theAlleyPOS/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/main/resources/theAlleyPOS/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/main/resources/theAlleyPOS/Login.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +14,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -35,7 +38,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Grant__branch",
     "last_opened_file_path": "C:/Users/Sebastian/Desktop/Project2/The-Alley-POS-System/SQLTableCode/populate",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",

@@ -12,7 +12,7 @@
 
     <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
         <image>
-            <Image url="@../../java/theAlleyPOS/images/theAlleyLogo.png" />
+            <Image url="file:/C:/Users/Sebastian/Desktop/Project2/The-Alley-POS-System/front-end/src/main/java/theAlleyPOS/images/theAlleyLogo.png" />
         </image>
     </ImageView>
     <TableView fx:id="inventoryTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="760.0" style="-fx-background-color: white;">
@@ -26,5 +26,6 @@
         <TextField fx:id="itemPriceField" promptText="Item Price" />
         <Button onAction="#handleAddItem" text="Add Item" />
         <Button onAction="#handleUpdateItem" text="Update Item" />
+        <Button fx:id="inventoryHomeButton" layoutX="406.0" layoutY="10.0" onAction="#handleHomeButton" text="Home" />
     </HBox>
 </VBox>

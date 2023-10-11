@@ -4,7 +4,9 @@ module com.example.test {
     requires java.sql;
 
     opens theAlleyPOS to javafx.fxml;
+    opens theAlleyPOS.controller to javafx.fxml;
+    opens theAlleyPOS.model to javafx.base; // This line provides the needed access
+
     exports theAlleyPOS;
     exports theAlleyPOS.controller;
-    opens theAlleyPOS.controller to javafx.fxml;
 }

@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class LoginController {
 
@@ -24,6 +25,10 @@ public class LoginController {
             deleteButton, enterButton;
 
     @FXML
+    private static final String DB_URL = "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db";
+    private static final String USER = "csce315_909_roshantayab";
+    private static final String PASS = "password";
+
     public void handleLogin(ActionEvent actionEvent) {
         // TODO: Handle login (Put logic here to process the entered ID)
         /*brainstorming:
@@ -33,6 +38,40 @@ public class LoginController {
 
             if(ID is valid)
         */
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }//end try catch
+        try{
+            //create a statement object
+            Statement stmt = conn.createStatement();
+            //create an SQL statement
+            String sqlStatement = "SELECT * FROM managers"; //test statement to ensure connection works
+            //send statement to DBMS
+            ResultSet result = stmt.executeQuery(sqlStatement);
+
+            //OUTPUT
+            System.out.println("Select Names from Cashier Table");
+            System.out.println("______________________________________");
+            while (result.next()) {
+                System.out.println(result.getString("name"));
+            }
+
+        } catch (Exception e){
+            System.out.println("Error accessing Database.");
+        }
+        System.out.println("Opened database successfully");
+        try {
+            conn.close();
+            System.out.println("Connection Closed.");
+        } catch(Exception e) {
+            System.out.println("Connection NOT Closed.");
+        }//end try catch
+
+
 
         // After validation, switch to next screen:
         try {

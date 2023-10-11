@@ -18,18 +18,18 @@ import java.sql.*;
 import java.util.Objects;
 
 public class LoginController {
-
+    @FXML
+    private static final String DB_URL = "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db";
+    private static final String USER = "csce315_909_roshantayab";
+    private static final String PASS = "password";
     private boolean IsValidID(String ID){
         //Building the connection
         Connection conn = null;
         try {
             //Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(
-                    "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db",
-                    "csce315_909_gshields432", "password");
-            //TODO: ensure that plaintext isn't in the user/pass. maybe put in another file?
-            // can we make a new user on the db that just has read-only access to login info and that way
-            // we dont have to use one of our login's for this?
+                    DB_URL,
+                    USER, PASS);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
@@ -67,17 +67,12 @@ public class LoginController {
             sixButton, sevenButton, eightButton, nineButton, zeroButton,
             deleteButton, enterButton;
 
-    @FXML
-    private static final String DB_URL = "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db";
-    private static final String USER = "csce315_909_roshantayab";
-    private static final String PASS = "password";
+
 
     public void handleLogin(ActionEvent actionEvent) {
-        if(!IsValidID(employeeID.getText())){
+        if(!IsValidID(employeeID.getText())) {
             employeeID.setText("------");
-
-            if(ID is valid)
-        */
+        }
 
         // After validation, switch to next screen:
         try {

@@ -45,8 +45,28 @@ public class LoginController {
         System.out.println("Error accessing Database.");
     }
      System.out.println("Opened database successfully");
-    private boolean IsValidID(int ID){
+    private boolean IsValidID(String ID){
+        try{
+            //create a statement object
+            Statement stmt = conn.createStatement();
+            //create an SQL statement
+            String sqlStatement = "SELECT password FROM cashiers"; //test statement to ensure connection works
+            //send statement to DBMS
+            ResultSet result = stmt.executeQuery(sqlStatement);
 
+            //OUTPUT
+            while (result.next()) {
+                if(result.getString("password") == ID){ // if ID matches a password (employeeID)
+                    return true;
+                }
+                System.out.println(result.getString("name"));
+            }
+            return false;
+        } catch (Exception e){
+            System.out.println("Error accessing Database.");
+            return false;
+        }
+        return false; //code shouldn't reach here
     }
     @FXML
     private TextField employeeID;
@@ -66,6 +86,9 @@ public class LoginController {
                 break/dont proceed
             }
         */
+        if(!IsValidID(employeeID)){
+            employeeID = "-----"
+        }
 
         // After validation, switch to next screen:
         try {

@@ -8,7 +8,13 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Connection;
+
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoginController {
     // "jdbc:postgresql://csce-315-db.engr.tamu.edu/sthomas_demo" demo url
@@ -37,14 +43,14 @@ public class LoginController {
             //send statement to DBMS
             ResultSet result = stmt.executeQuery(sqlStatement);
             try {
-                conn.close();
+                conn.close(); //connection can be closed. all required data has been accessed.
                 System.out.println("Connection Closed.");
             } catch(Exception e) {
                 System.out.println("Connection NOT Closed.");
-            }//end try catch
+            }
             //OUTPUT
             while (result.next()) {
-                if(result.getString("password") == ID){ // if ID matches a password (employeeID)
+                if(Objects.equals(result.getString("password"), ID)){ // if ID matches a password (employeeID)
                     return true;
                 }
             }
@@ -53,7 +59,6 @@ public class LoginController {
             System.out.println("Error accessing Database.");
             return false;
         }
-        return false; //code shouldn't reach here
     }
     @FXML
     private TextField employeeID;
@@ -65,24 +70,10 @@ public class LoginController {
 
     @FXML
     public void handleLogin(ActionEvent actionEvent) {
-        // TODO: Handle login (Put logic here to process the entered ID)
-        /*brainstorming:
-            Each employee (managers & cashiers) has an ID in the database.
-                Each ID should be 5 digits long (as opposed to 0,1,2... with default ID's)
-            The 5 digit code entered into the LoginController is used to search for a match in the DB
-
-            if(ID is valid)
-        */
-        if(!IsValidID(employeeID)){
-            employeeID = "------";
+        if(!IsValidID(employeeID.getText())){
+            employeeID.setText("------");
 
         }
-        try { // we can close the connection to the database. Login no longer needs it.
-            conn.close();
-            System.out.println("Connection Closed.");
-        } catch(Exception e) {
-            System.out.println("Connection NOT Closed.");
-        }//end try catch
         // After validation, switch to next screen:
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/EmployeeTimeClock.fxml"));

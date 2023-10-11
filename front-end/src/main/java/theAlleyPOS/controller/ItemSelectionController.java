@@ -9,6 +9,11 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Objects;
 
 public class ItemSelectionController {
     @javafx.fxml.FXML
@@ -63,9 +68,38 @@ public class ItemSelectionController {
     private Button btnHome;
     @javafx.fxml.FXML
     private ComboBox cmbCoupon;
-
+    public void UpdateDB(String item_name){
+        Connection conn = null;
+        try {
+            //Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection(
+                    "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db",
+                    "csce315_909_gshields432", "password");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        try{
+            //create a statement object
+            Statement stmt = conn.createStatement();
+            //create an SQL statement
+            String sqlStatement = "UPDATE items SET inventory_count = inventory_count - 1 " +
+                    "WHERE item_name = '" + item_name + "'"; //test statement to ensure connection works
+            //send statement to DBMS
+            ResultSet result = stmt.executeQuery(sqlStatement);
+            try {
+                conn.close(); //connection can be closed. all required data has been accessed.
+                System.out.println("Connection Closed.");
+            } catch(Exception e) {
+                System.out.println("Connection NOT Closed.");
+            }
+        } catch (Exception e){
+            System.out.println("Error accessing Database.");
+        }
+    }
     @javafx.fxml.FXML
     public void handleSnowStrawberryLuluClick(ActionEvent actionEvent) {
+        UpdateDB("Snow Strawberry Lulu");
     }
 
     @javafx.fxml.FXML

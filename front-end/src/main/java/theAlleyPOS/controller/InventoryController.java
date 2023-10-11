@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class InventoryController {
+    public TableColumn inventoryCountColumn;
+    public TextField itemCountField;
     @FXML
     private TableView inventoryTable;
     @FXML
@@ -31,6 +33,14 @@ public class InventoryController {
     private TextField itemPriceField;
     @FXML
     private Button inventoryHomeButton;
+
+    @FXML
+    private void initialize() {
+        itemColumn.setCellValueFactory(new PropertyValueFactory<Item, String>("itemName"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<Item, Double>("price"));
+        inventoryCountColumn.setCellValueFactory(new PropertyValueFactory<Item, Integer>("inventoryCount"));
+        refreshTable();
+    }
 
     @FXML
     public void handleAddItem(ActionEvent actionEvent) {
@@ -48,13 +58,6 @@ public class InventoryController {
 
     public void updateItem(int id, String itemName, double price, int inventoryCount) {
         // TODO
-    }
-
-    @FXML
-    private void initialize() {
-        itemColumn.setCellValueFactory(new PropertyValueFactory<Item, String>("itemName"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Item, Double>("price"));
-        refreshTable();
     }
 
     private void refreshTable() {

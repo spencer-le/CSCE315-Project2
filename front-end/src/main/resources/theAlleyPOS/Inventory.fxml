@@ -19,13 +19,15 @@
         <columns>
             <TableColumn fx:id="itemColumn" text="Item" />
             <TableColumn fx:id="priceColumn" text="Price" />
+            <TableColumn fx:id="inventoryCountColumn" text="Count" />
         </columns>
     </TableView>
     <HBox spacing="10.0">
         <TextField fx:id="itemNameField" promptText="Item Name" />
         <TextField fx:id="itemPriceField" promptText="Item Price" />
-        <Button onAction="#handleAddItem" text="Add Item" />
-        <Button onAction="#handleUpdateItem" text="Update Item" />
-        <Button fx:id="inventoryHomeButton" layoutX="406.0" layoutY="10.0" onAction="#handleHomeButton" text="Home" />
+      <TextField fx:id="itemCountField" layoutX="170.0" layoutY="10.0" promptText="Item Count" />
+        <Button onAction="#handleAddItem" prefHeight="26.0" prefWidth="90.0" text="Add Item" />
+        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUpdateItem" prefHeight="26.0" prefWidth="90.0" text="Update Item" />
+        <Button fx:id="inventoryHomeButton" layoutX="406.0" layoutY="10.0" onAction="#handleHomeButton" prefHeight="26.0" prefWidth="90.0" text="Home" />
     </HBox>
 </VBox>

@@ -67,11 +67,11 @@ public class LoginController {
     public void handleLogin(ActionEvent actionEvent) {
         // TODO: Handle login (Put logic here to process the entered ID)
         /*brainstorming:
-            if(!IsValidID(int id)){ //if the id is NOT VALID
-                clear entry
-                display error text
-                break/dont proceed
-            }
+            Each employee (managers & cashiers) has an ID in the database.
+                Each ID should be 5 digits long (as opposed to 0,1,2... with default ID's)
+            The 5 digit code entered into the LoginController is used to search for a match in the DB
+
+            if(ID is valid)
         */
         if(!IsValidID(employeeID)){
             employeeID = "------";
@@ -93,12 +93,10 @@ public class LoginController {
 
             // Switching scene
             currentStage.setScene(anotherScene);
-
         } catch (IOException e) {
             System.out.println("Failed to load another screen.");
             e.printStackTrace();
         }
-
     }
 
     @FXML

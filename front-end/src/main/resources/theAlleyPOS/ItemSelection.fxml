@@ -1,166 +1,280 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #414041;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="theAlleyPOS.controller.ItemSelectionController">
-   <children>
-      <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="file:/C:/Users/Sebastian/Desktop/Project2/The-Alley-POS-System/front-end/src/main/java/theAlleyPOS/images/theAlleyLogo.png" />
-         </image>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin></ImageView>
-      <GridPane alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="770.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <VBox.margin>
-            <Insets bottom="5.0" />
-         </VBox.margin>
-         <children>
-            <Button contentDisplay="CENTER" ellipsisString="" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-color: #F2D057;" text="Lulu Fresh Fruit Series" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-color: #F2D057;" text="Snow Velvet Series" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button layoutX="110.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-color: #F2D057;" text="The Finest Collection" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button layoutX="210.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-color: #F2D057;" text="Original Brewed Tea Series" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" />
-            <Button layoutX="310.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-color: #F2D057;" text="Premium Milk Tea Series" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button layoutX="410.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-color: #F2D057;" text="Aurora Series" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button layoutX="510.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-color: #F2D057;" text="Brown Sugar Deerioca Series" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-         </children>
-      </GridPane>
-      <GridPane hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="700.0" vgap="10.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 1" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font></Button>
-            <Button layoutX="11.0" layoutY="10.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 2" textFill="WHITE" GridPane.columnIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="152.0" layoutY="10.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 3" textFill="WHITE" GridPane.columnIndex="2">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="295.0" layoutY="10.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 4" textFill="WHITE" GridPane.columnIndex="3">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="437.0" layoutY="10.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 5" textFill="WHITE" GridPane.columnIndex="4">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="580.0" layoutY="10.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 6" textFill="WHITE" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="10.0" layoutY="91.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 7" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="152.0" layoutY="91.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 8" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="295.0" layoutY="91.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 9" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="437.0" layoutY="91.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="130.0" style="-fx-background-color: black;" text="Item 10" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
-      </GridPane>
-      <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: gray;" text="Checkout" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
-      </Button>
-      <GridPane hgap="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="700.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-background-color: black;" text="Sugar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-background-color: black;" text="Ice" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="150.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-background-color: black;" text="Toppings" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="290.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-background-color: black;" text="Foam" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button layoutX="430.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="75.0" prefWidth="140.0" style="-fx-background-color: black;" text="Custom" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </GridPane>
-   </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="theAlleyPOS.controller.ItemSelectionController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="713.2" minWidth="10.0" prefWidth="575.8" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="-Infinity" prefWidth="250.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="471.4" minHeight="10.0" prefHeight="471.4" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <ScrollPane fitToWidth="true" prefHeight="300.0" prefWidth="200.0">
+            <TabPane tabClosingPolicy="UNAVAILABLE">
+                <tabs>
+                    <Tab text="Lulu Fresh Fruit Series">
+                        <content>
+                            <AnchorPane prefHeight="430.0">
+                                <children>
+                                    <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="250.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <children>
+                                            <Button fx:id="btnSnowStrawberryLulu" mnemonicParsing="false" onAction="#handleSnowStrawberryLuluClick" prefHeight="75.0" prefWidth="100.0" text="Snow Strawberry Lulu" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                            <Button fx:id="btnOrangeLulu" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleOrangeLuluClick" prefHeight="75.0" prefWidth="100.0" text="Orange Lulu" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                                        </children>
+                                        <padding>
+                                            <Insets left="10.0" top="10.0" />
+                                        </padding>
+                                    </GridPane>
+                                </children></AnchorPane>
+                        </content>
+                    </Tab>
+                    <Tab text="Snow Velvet Series">
+                        <content>
+                            <AnchorPane prefHeight="430.0">
+                                <children>
+                                    <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="250.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <children>
+                                            <Button fx:id="btnSnowVelvetPeach" mnemonicParsing="false" onAction="#handleSnowVelvetPeachClick" prefHeight="75.0" prefWidth="100.0" text="Snow Velvet Peach Oolong Tea" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                            <Button fx:id="btnSnowVelvetLatte" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSnowVelvetLatteClick" prefHeight="75.0" prefWidth="100.0" text="Snow Velvet Brown Sugar Latte" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                                        </children>
+                                        <padding>
+                                            <Insets left="10.0" top="10.0" />
+                                        </padding>
+                                    </GridPane>
+                                </children></AnchorPane>
+                        </content>
+                    </Tab>
+                    <Tab text="The Finest Collection">
+                        <content>
+                            <AnchorPane prefHeight="430.0">
+                                <children>
+                                    <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="250.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <children>
+                                            <Button fx:id="btnHojichaLatte" mnemonicParsing="false" onAction="#handleHojichaLatteClick" prefHeight="75.0" prefWidth="100.0" text="Hojicha Peach Oolong Latte" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                            <Button fx:id="btnMatchaLatte" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleMatchaLatteClick" prefHeight="75.0" prefWidth="100.0" text="Matcha Peach Oolong Latte" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                                        </children>
+                                        <padding>
+                                            <Insets left="10.0" top="10.0" />
+                                        </padding>
+                                    </GridPane>
+                                </children></AnchorPane>
+                        </content>
+                    </Tab>
+                    <Tab text="Original Brewed Tea Series">
+                        <content>
+                            <AnchorPane prefHeight="430.0">
+                                <children>
+                                    <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="375.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <children>
+                                            <Button fx:id="btnRoyalTeaOriginal" mnemonicParsing="false" onAction="#handleRoyalTeaOriginalClick" prefHeight="75.0" prefWidth="100.0" text="Royal No.9 Tea" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                            <Button fx:id="btnAssamTeaOriginal" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleAssamTeaOriginalClick" prefHeight="75.0" prefWidth="100.0" text="Assam Black Tea" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                                            <Button fx:id="btnPeachOolongTea" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePeachOolongTeaClick" prefHeight="75.0" prefWidth="100.0" text="Peach Oolong Tea" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" />
+                                        </children>
+                                        <padding>
+                                            <Insets left="10.0" top="10.0" />
+                                        </padding>
+                                    </GridPane>
+                                </children>
+                            </AnchorPane>
+                        </content>
+                    </Tab>
+                    <Tab text="Premium Milk Tea Series">
+                        <content>
+                            <AnchorPane prefHeight="430.0">
+                                <children>
+                                    <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="375.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <children>
+                                            <Button fx:id="btnRoyalTeaPremium" mnemonicParsing="false" onAction="#handleRoyalTeaPremiumClick" prefHeight="75.0" prefWidth="100.0" text="Royal No.9 Tea" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                            <Button fx:id="btnAssamTeaPremium" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleAssamTeaPremiumClick" prefHeight="75.0" prefWidth="100.0" text="Assam Black Tea" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                                            <Button fx:id="btnGardenMilkTea" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleGardenMilkTeaClick" prefHeight="75.0" prefWidth="100.0" text="Garden Milk Tea" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" />
+                                        </children>
+                                        <padding>
+                                            <Insets left="10.0" top="10.0" />
+                                        </padding>
+                                    </GridPane>
+                                </children>
+                            </AnchorPane>
+                        </content>
+                    </Tab>
+                    <Tab text="Aurora Series">
+                        <content>
+                            <AnchorPane prefHeight="430.0">
+                                <children>
+                                    <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="250.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <children>
+                                            <Button fx:id="btnNorthernLights" mnemonicParsing="false" onAction="#handleNorthernLightsClick" prefHeight="75.0" prefWidth="100.0" text="Northern Lights" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                            <Button fx:id="btnMorningDawn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleMorningDawnClick" prefHeight="75.0" prefWidth="100.0" text="Morning Dawn" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                                        </children>
+                                        <padding>
+                                            <Insets left="10.0" top="10.0" />
+                                        </padding>
+                                    </GridPane>
+                                </children></AnchorPane>
+                        </content>
+                    </Tab>
+                    <Tab text="Brown Sugar Deerioca Series">
+                        <content>
+                            <AnchorPane prefHeight="430.0">
+                                <children>
+                                    <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="375.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <children>
+                                            <Button fx:id="btnDeeriocaMilk" mnemonicParsing="false" onAction="#handleDeeriocaMilkClick" prefHeight="75.0" prefWidth="100.0" text="Brown Sugar Deerioca Fresh Milk" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                            <Button fx:id="btnCocoaDeeriocaMilk" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCocoaDeeriocaMilkClick" prefHeight="75.0" prefWidth="100.0" text="Cocoa Brown Sugar Deerioca Fresh Milk" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                                            <Button fx:id="btnMatchaDeeriocaMilk" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleMatchaDeeriocaMilkClick" prefHeight="75.0" prefWidth="100.0" text="Matcha Brown Sugar Deerioca Fresh Milk" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" />
+                                        </children>
+                                        <padding>
+                                            <Insets left="10.0" top="10.0" />
+                                        </padding>
+                                    </GridPane>
+                                </children>
+                            </AnchorPane>
+                        </content>
+                    </Tab>
+                </tabs>
+            </TabPane>
+        </ScrollPane>
+        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: derive(-fx-base, 20%); -fx-border-color: black;" GridPane.columnIndex="1">
+            <children>
+                <Label style="-fx-font-size: 20px; -fx-padding: 10px;" text="Total: $0.00" />
+                <ListView fx:id="orderList" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                        </FXCollections>
+                    </items>
+                </ListView>
+            </children>
+        </VBox>
+        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: derive(-fx-base, 20%);" GridPane.rowIndex="1">
+            <children>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: derive(-fx-base, 20%);">
+                    <children>
+                        <GridPane alignment="CENTER" hgap="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="20.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Button fx:id="btnPearls" mnemonicParsing="false" onAction="#handlePearlsClick" prefHeight="30.0" prefWidth="100.0" text="Pearls" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                <Button fx:id="btnSnowVelvet" mnemonicParsing="false" onAction="#handleSnowVelvetClick" prefHeight="30.0" prefWidth="100.0" text="Snow Velvet" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                <ComboBox fx:id="cmbSweetness" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleSweetnessChange" prefHeight="30.0" prefWidth="100.0" promptText="Sweetness" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="100% (Regular Sweetness)" />
+                                            <String fx:value="50% (Half Sweet)" />
+                                            <String fx:value="25% (Less Sweet)" />
+                                            <String fx:value="0% (No Sweetness)" />
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
+
+                                <ComboBox fx:id="cmbIceLevel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleIceLevelChange" prefHeight="30.0" prefWidth="100.0" promptText="Ice Level" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="100% (Regular Ice)" />
+                                            <String fx:value="50% (Less Ice)" />
+                                            <String fx:value="25% (Less 50%)" />
+                                            <String fx:value="0% (No Ice)" />
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
+
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+            </children></VBox>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-background-color: derive(-fx-base, 20%);" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <children>
+                <GridPane alignment="CENTER" hgap="10.0" vgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="btnCash" mnemonicParsing="false" onAction="#handleCashClick" prefHeight="50.0" prefWidth="100.0" text="Cash" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnCard" mnemonicParsing="false" onAction="#handleCardClick" prefHeight="50.0" prefWidth="100.0" text="Card" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnHome" mnemonicParsing="false" onAction="#handleHomeClick" prefHeight="50.0" prefWidth="100.0" text="Home" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+
+                        <ComboBox fx:id="cmbCoupon" onAction="#handleCouponChange" prefHeight="50.0" prefWidth="100.0" promptText="Coupon" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Add coupon 1" />
+                                    <String fx:value="Add coupon 2" />
+                                    <String fx:value="Add coupon 3" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+
+                    </children>
+                </GridPane>
+            </children>
+        </VBox>
+    </children>
+</GridPane>

@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import theAlleyPOS.DatabaseHelper;
+import theAlleyPOS.model.Cart;
 import theAlleyPOS.model.Session;
 
 import java.io.IOException;
@@ -65,6 +68,12 @@ public class ItemSelectionController {
     private Button btnHome;
     @FXML
     private ComboBox cmbCoupon;
+
+    private DatabaseHelper dbHelper;
+    private Cart cart;
+    @FXML
+    private Label totalPriceLabel;
+
 
     @FXML
     public void handleSnowStrawberryLuluClick(ActionEvent actionEvent) {

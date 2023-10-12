@@ -61,6 +61,25 @@ public class DatabaseHelper {
         }
         return items;
     }
+
+    public Item getItemById(int itemId) {
+        String sql = "SELECT * FROM items WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, itemId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Item(rs.getInt("id"), rs.getString("item_name"),
+                            rs.getDouble("price"), rs.getInt("inventory_count"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;  // Return null if item not found
+    }
 }
 
 /*

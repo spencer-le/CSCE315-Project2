@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 import theAlleyPOS.model.Session;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class ItemSelectionController {
     @FXML
@@ -66,28 +70,71 @@ public class ItemSelectionController {
     @FXML
     private ComboBox cmbCoupon;
 
+    public void UpdateDB(String item_name){
+        /*
+        this function was originally made to update the database on click, but will be reformatted
+        to read an order and update the DB one item (and its modifiers) at a time
+         */
+        Connection conn = null;
+        try {
+            //Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection(
+                    "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db",
+                    "csce315_909_gshields432", "password");
+            //TODO replace user with current user, not just grant
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        try{
+            //create a statement object
+            Statement stmt = conn.createStatement();
+            //create an SQL statement
+            String sqlStatement = "UPDATE items SET inventory_count = inventory_count - 1 " +
+                    "WHERE item_name = '" + item_name + "'";
+            //send statement to DBMS
+            ResultSet result = stmt.executeQuery(sqlStatement);
+            try {
+                conn.close(); //connection can be closed. all required data has been accessed.
+                System.out.println("Connection Closed.");
+            } catch(Exception e) {
+                System.out.println("Connection NOT Closed.");
+            }
+        } catch (Exception e){
+            System.out.println("Error accessing Database.");
+        }
+    }
+
+    public void AddItemToOrder(String item_name){
+
+    }
     @FXML
     public void handleSnowStrawberryLuluClick(ActionEvent actionEvent) {
     }
 
     @FXML
     public void handleOrangeLuluClick(ActionEvent actionEvent) {
+        //UpdateDB("Orange Lulu");
     }
 
     @FXML
     public void handleSnowVelvetPeachClick(ActionEvent actionEvent) {
+        //UpdateDB("Snow Velvet Peach Oolong Tea");
     }
 
     @FXML
     public void handleSnowVelvetLatteClick(ActionEvent actionEvent) {
+        //UpdateDB("Snow Velvet Brown Sugar Latte");
     }
 
     @FXML
     public void handleHojichaLatteClick(ActionEvent actionEvent) {
+        //UpdateDB("Hojicha Peach Oolong Latte");
     }
 
     @FXML
     public void handleMatchaLatteClick(ActionEvent actionEvent) {
+        //UpdateDB("Matcha Peach Oolong Latte");
     }
 
     @FXML

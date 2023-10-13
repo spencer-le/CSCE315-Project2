@@ -21,7 +21,7 @@
                 <tabs>
                     <Tab text="Lulu Fresh Fruit Series">
                         <content>
-                            <AnchorPane prefHeight="430.0">
+                            <AnchorPane prefHeight="430.0" style="-fx-background-color: #414041">
                                 <children>
                                     <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="250.0">
                                         <columnConstraints>
@@ -44,7 +44,7 @@
                     </Tab>
                     <Tab text="Snow Velvet Series">
                         <content>
-                            <AnchorPane prefHeight="430.0">
+                            <AnchorPane prefHeight="430.0" style="-fx-background-color: #414041">
                                 <children>
                                     <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="250.0">
                                         <columnConstraints>
@@ -67,7 +67,7 @@
                     </Tab>
                     <Tab text="The Finest Collection">
                         <content>
-                            <AnchorPane prefHeight="430.0">
+                            <AnchorPane prefHeight="430.0" style="-fx-background-color: #414041">
                                 <children>
                                     <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="250.0">
                                         <columnConstraints>
@@ -90,7 +90,7 @@
                     </Tab>
                     <Tab text="Original Brewed Tea Series">
                         <content>
-                            <AnchorPane prefHeight="430.0">
+                            <AnchorPane prefHeight="430.0" style="-fx-background-color: #414041">
                                 <children>
                                     <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="375.0">
                                         <columnConstraints>
@@ -116,7 +116,7 @@
                     </Tab>
                     <Tab text="Premium Milk Tea Series">
                         <content>
-                            <AnchorPane prefHeight="430.0">
+                            <AnchorPane prefHeight="430.0" style="-fx-background-color: #414041">
                                 <children>
                                     <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="375.0">
                                         <columnConstraints>
@@ -142,7 +142,7 @@
                     </Tab>
                     <Tab text="Aurora Series">
                         <content>
-                            <AnchorPane prefHeight="430.0">
+                            <AnchorPane prefHeight="430.0" style="-fx-background-color: #414041">
                                 <children>
                                     <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="250.0">
                                         <columnConstraints>
@@ -165,7 +165,7 @@
                     </Tab>
                     <Tab text="Brown Sugar Deerioca Series">
                         <content>
-                            <AnchorPane prefHeight="430.0">
+                            <AnchorPane prefHeight="430.0" style="-fx-background-color: #414041">
                                 <children>
                                     <GridPane alignment="CENTER" hgap="50.0" layoutX="14.0" layoutY="14.0" prefHeight="75.0" prefWidth="375.0">
                                         <columnConstraints>

@@ -61,6 +61,53 @@ public class DatabaseHelper {
         }
         return items;
     }
+
+    public void addItem(Item item) {
+        String sql = "INSERT INTO items (id, item_name, price, inventory_count) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, item.getId());
+            pstmt.setString(2, item.getItemName());
+            pstmt.setDouble(3, item.getPrice());
+            pstmt.setInt(4, item.getInventoryCount());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteItem(int id) {
+        String sql = "DELETE FROM items WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateItemInDatabase(Item item) {
+        String sql = "UPDATE items SET item_name = ?, price = ?, inventory_count = ? WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, item.getItemName());
+            pstmt.setDouble(2, item.getPrice());
+            pstmt.setInt(3, item.getInventoryCount());
+            pstmt.setInt(4, item.getId());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 /*

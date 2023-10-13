@@ -62,23 +62,78 @@ public class DatabaseHelper {
         return items;
     }
 
-    public Item getItemById(int itemId) {
-        String sql = "SELECT * FROM items WHERE id = ?";
+    public void addItem(Item item) {
+        String sql = "INSERT INTO items (id, item_name, price, inventory_count) VALUES (?, ?, ?, ?)";
+
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, itemId);
+            pstmt.setInt(1, item.getId());
+            pstmt.setString(2, item.getItemName());
+            pstmt.setDouble(3, item.getPrice());
+            pstmt.setInt(4, item.getInventoryCount());
 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteItem(int id) {
+        String sql = "DELETE FROM items WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateItemInDatabase(Item item) {
+        String sql = "UPDATE items SET item_name = ?, price = ?, inventory_count = ? WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, item.getItemName());
+            pstmt.setDouble(2, item.getPrice());
+            pstmt.setInt(3, item.getInventoryCount());
+            pstmt.setInt(4, item.getId());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Item getItemByName(String itemName) {
+        Item item = null;
+        String sql = "SELECT * FROM items WHERE item_name = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, itemName);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return new Item(rs.getInt("id"), rs.getString("item_name"),
-                            rs.getDouble("price"), rs.getInt("inventory_count"));
+                    item = new Item(rs.getInt("id"), rs.getString("item_name"), rs.getDouble("price"), rs.getInt("inventory_count"));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;  // Return null if item not found
+        return item;
+    }
+
+    public void decrementItemInventory(String itemName) {
+        String sql = "UPDATE items SET inventory_count = inventory_count - 1 WHERE item_name = ? AND inventory_count > 0";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, itemName);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

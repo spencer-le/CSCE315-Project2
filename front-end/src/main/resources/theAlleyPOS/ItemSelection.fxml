@@ -194,13 +194,14 @@
         </ScrollPane>
         <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: derive(-fx-base, 20%); -fx-border-color: black;" GridPane.columnIndex="1">
             <children>
-                <Label style="-fx-font-size: 20px; -fx-padding: 10px;" text="Total: $0.00" />
-                <ListView fx:id="orderList" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
-                    <items>
-                        <FXCollections fx:factory="observableArrayList">
-                        </FXCollections>
-                    </items>
-                </ListView>
+                <Label fx:id="totalLabel" style="-fx-font-size: 20px; -fx-padding: 10px;" text="Total: $0.00" />
+                <TableView fx:id="orderTable">
+                    <columns>
+                        <TableColumn fx:id="itemColumn" text="Item" prefWidth="125.0" />
+                        <TableColumn fx:id="priceColumn" text="Price" prefWidth="60.0" />
+                        <TableColumn fx:id="deleteColumn" text="" prefWidth="60.0" />
+                    </columns>
+                </TableView>
             </children>
         </VBox>
         <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: derive(-fx-base, 20%);" GridPane.rowIndex="1">
@@ -240,7 +241,6 @@
                                         </FXCollections>
                                     </items>
                                 </ComboBox>
-
                             </children>
                         </GridPane>
                     </children>
@@ -261,13 +261,12 @@
                         <Button fx:id="btnCash" mnemonicParsing="false" onAction="#handleCashClick" prefHeight="50.0" prefWidth="100.0" text="Cash" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <Button fx:id="btnCard" mnemonicParsing="false" onAction="#handleCardClick" prefHeight="50.0" prefWidth="100.0" text="Card" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <Button fx:id="btnHome" mnemonicParsing="false" onAction="#handleHomeClick" prefHeight="50.0" prefWidth="100.0" text="Home" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-
                         <ComboBox fx:id="cmbCoupon" onAction="#handleCouponChange" prefHeight="50.0" prefWidth="100.0" promptText="Coupon" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="Add coupon 1" />
-                                    <String fx:value="Add coupon 2" />
-                                    <String fx:value="Add coupon 3" />
+                                    <String fx:value="25% Off" />
+                                    <String fx:value="50% Off" />
+                                    <String fx:value="75% Off" />
                                 </FXCollections>
                             </items>
                         </ComboBox>

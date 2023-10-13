@@ -60,7 +60,6 @@ public class InventoryController {
                         refreshTable();
                     });
 
-                    // Adjusted inline styling for the delete button
                     deleteButton.setStyle("-fx-background-color: transparent; -fx-text-fill: black; -fx-border-color: transparent; -fx-border-width: 0px;");
 
                     setGraphic(deleteButton);
@@ -110,7 +109,6 @@ public class InventoryController {
 
         refreshTable();
 
-        // Optionally, clear the input fields after updating
         itemIdField.clear();
         itemNameField.clear();
         itemPriceField.clear();

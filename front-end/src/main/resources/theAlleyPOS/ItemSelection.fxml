@@ -266,7 +266,7 @@
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="25% Off" />
                                     <String fx:value="50% Off" />
-                                    <String fx:value="75% Off" />
+                                    <String fx:value="275% Off" />
                                 </FXCollections>
                             </items>
                         </ComboBox>

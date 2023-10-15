@@ -70,7 +70,7 @@ public class ManagerTimeClock {
 
     @FXML
     public void handleManagerAnalyticsAction(ActionEvent actionEvent) {
-        // TODO: Will be made during phase 4
+        loadAnalyticsScreen(actionEvent);
     }
 
     private void loadLoginScreen(ActionEvent event) {
@@ -85,6 +85,22 @@ public class ManagerTimeClock {
             currentStage.setScene(loginScene);
         } catch (IOException e) {
             System.out.println("Failed to load login screen.");
+            e.printStackTrace();
+        }
+    }
+
+    private void loadAnalyticsScreen(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/Analytics.fxml"));
+            Scene loginScene = new Scene(fxmlLoader.load());
+
+            // Get the current stage using any of the controls
+            Stage currentStage = (Stage) managerAnalyticsButton.getScene().getWindow();
+
+            // Set the scene to the stage
+            currentStage.setScene(loginScene);
+        } catch (IOException e) {
+            System.out.println("Failed to load analytics screen.");
             e.printStackTrace();
         }
     }

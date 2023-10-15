@@ -135,6 +135,25 @@ public class DatabaseHelper {
             e.printStackTrace();
         }
     }
+
+    public List<Item> fetchItemsBelowInventoryCount(int threshold) {
+        List<Item> items = new ArrayList<>();
+        String sql = "SELECT * FROM items WHERE inventory_count < ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, threshold);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    items.add(new Item(rs.getInt("id"), rs.getString("item_name"), rs.getDouble("price"), rs.getInt("inventory_count")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
 }
 
 /*

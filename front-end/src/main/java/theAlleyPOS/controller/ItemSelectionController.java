@@ -191,10 +191,10 @@ public class ItemSelectionController {
 
         Order newOrder = new Order(orderId, "Customer " + orderId, currentDateTime, totalCost);
         dbHelper.addOrder(newOrder);
-
         for (Orderable orderable : orderedItems) {
             if (orderable instanceof Item) {
                 dbHelper.decrementItemInventory(orderable.getName());
+                dbHelper.addToOrderedItems(newOrder.getId(), ((Item) orderable).getId());
             } else if (orderable instanceof Modifier) {
                 dbHelper.decrementModifierInventory(orderable.getName());
             }

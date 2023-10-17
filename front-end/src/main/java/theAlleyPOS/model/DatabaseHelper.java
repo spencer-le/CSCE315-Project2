@@ -220,7 +220,6 @@ public class DatabaseHelper {
     }
 
     public void addOrder(Order order) {
-//        INSERT INTO orders (id, customer_name, order_date, total_cost) VALUES (1, 'Spencer', '2023-10-16 14:30:00', 10.0);
         String sql = "INSERT INTO orders (id, customer_name, order_date, total_cost) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
@@ -229,10 +228,7 @@ public class DatabaseHelper {
             pstmt.setString(2, order.getCustomerName());
             pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(order.getOrderDate()));
             pstmt.setDouble(4, order.getTotalCost());
-//            pstmt.setInt(1, 2); // ID
-//            pstmt.setString(2, "Le"); // Customer Name
-//            pstmt.setString(3, "2023-10-16 14:30:00"); // Order Date in the specified format
-//            pstmt.setDouble(4, 11.0); // Total Cost
+
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -240,6 +236,18 @@ public class DatabaseHelper {
         }
     }
 
+    public void addToOrderedItems(int order_id, int item_id) {
+        String sql = "INSERT INTO ordered_items (order_id, item_id) VALUES (?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, order_id);
+            pstmt.setInt(2, item_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 /*

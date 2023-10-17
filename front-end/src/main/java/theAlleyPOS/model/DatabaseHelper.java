@@ -2,6 +2,7 @@ package theAlleyPOS;
 import javafx.beans.property.SimpleIntegerProperty;
 import theAlleyPOS.model.Item;
 import theAlleyPOS.model.Order;
+import theAlleyPOS.model.Modifier;
 import theAlleyPOS.model.UserRole;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -173,6 +174,49 @@ public class DatabaseHelper {
             e.printStackTrace();
         }
         return newID;
+    }
+
+    public List<Modifier> fetchModifiers() {
+        List<Modifier> modifiers = new ArrayList<>();
+        String sql = "SELECT * FROM MODIFIERS";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                modifiers.add(new Modifier(rs.getInt("id"), rs.getString("modifier_name"), rs.getDouble("price"), rs.getInt("inventory_count")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return modifiers;
+    }
+
+    public void decrementModifierInventory(String modifierName) {
+        String sql = "UPDATE MODIFIERS SET inventory_count = inventory_count - 1 WHERE modifier_name = ? AND inventory_count > 0";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, modifierName);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Modifier getModifierByName(String modifierName) {
+        Modifier modifier = null;
+        String sql = "SELECT * FROM MODIFIERS WHERE modifier_name = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, modifierName);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    modifier = new Modifier(rs.getInt("id"), rs.getString("modifier_name"), rs.getDouble("price"), rs.getInt("inventory_count"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return modifier;
     }
 
     public void addOrder(Order order) {

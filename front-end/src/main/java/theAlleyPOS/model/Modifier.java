@@ -1,28 +1,43 @@
 package theAlleyPOS.model;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
-public class Modifier {
+public class Modifier implements Orderable {
     private SimpleIntegerProperty id;
-    private boolean pearls;
-    private boolean snowVelvet;
-    private double iceLevel;
-    private double sweetnessLevel;
+    private SimpleBooleanProperty pearls;
+    private SimpleBooleanProperty snowVelvet;
+    private SimpleDoubleProperty iceLevel;
+    private SimpleDoubleProperty sweetnessLevel;
+    private SimpleDoubleProperty price;
+    private SimpleIntegerProperty inventoryCount;
+    private SimpleStringProperty modifierName;
 
     public Modifier() {
         this.id = new SimpleIntegerProperty();
-        this.pearls = false;
-        this.snowVelvet = false;
-        this.iceLevel = 0;
-        this.sweetnessLevel = 0;
+        this.pearls = new SimpleBooleanProperty(false);
+        this.snowVelvet = new SimpleBooleanProperty(false);
+        this.iceLevel = new SimpleDoubleProperty(0);
+        this.sweetnessLevel = new SimpleDoubleProperty(0);
+        this.price = new SimpleDoubleProperty();
+        this.inventoryCount = new SimpleIntegerProperty();
     }
 
-    public Modifier(int id, boolean pearls, boolean snowVelvet, double iceLevel, double sweetnessLevel) {
+    public Modifier(int id, String modifierName, double price, int inventoryCount) {
         this.id = new SimpleIntegerProperty(id);
-        this.pearls = pearls;
-        this.snowVelvet = snowVelvet;
-        this.iceLevel = iceLevel;
-        this.sweetnessLevel = sweetnessLevel;
+        this.modifierName = new SimpleStringProperty(modifierName);
+        this.price = new SimpleDoubleProperty(price);
+        this.inventoryCount = new SimpleIntegerProperty(inventoryCount);
+    }
+
+    public String getModifierName() {
+        return modifierName.get();
+    }
+
+    public SimpleStringProperty modifierNameProperty() {
+        return modifierName;
     }
 
     public int getId() {
@@ -38,34 +53,80 @@ public class Modifier {
     }
 
     public boolean isPearls() {
-        return pearls;
+        return pearls.get();
     }
 
     public void setPearls(boolean pearls) {
-        this.pearls = pearls;
+        this.pearls.set(pearls);
+    }
+
+    public SimpleBooleanProperty pearlsProperty() {
+        return pearls;
     }
 
     public boolean isSnowVelvet() {
-        return snowVelvet;
+        return snowVelvet.get();
     }
 
     public void setSnowVelvet(boolean snowVelvet) {
-        this.snowVelvet = snowVelvet;
+        this.snowVelvet.set(snowVelvet);
+    }
+
+    public SimpleBooleanProperty snowVelvetProperty() {
+        return snowVelvet;
     }
 
     public double getIceLevel() {
-        return iceLevel;
+        return iceLevel.get();
     }
 
     public void setIceLevel(double iceLevel) {
-        this.iceLevel = iceLevel;
+        this.iceLevel.set(iceLevel);
+    }
+
+    public SimpleDoubleProperty iceLevelProperty() {
+        return iceLevel;
     }
 
     public double getSweetnessLevel() {
-        return sweetnessLevel;
+        return sweetnessLevel.get();
     }
 
     public void setSweetnessLevel(double sweetnessLevel) {
-        this.sweetnessLevel = sweetnessLevel;
+        this.sweetnessLevel.set(sweetnessLevel);
+    }
+
+    public SimpleDoubleProperty sweetnessLevelProperty() {
+        return sweetnessLevel;
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
+    }
+
+    public SimpleDoubleProperty priceProperty() {
+        return price;
+    }
+
+    public int getInventoryCount() {
+        return inventoryCount.get();
+    }
+
+    public void setInventoryCount(int inventoryCount) {
+        this.inventoryCount.set(inventoryCount);
+    }
+
+    public SimpleIntegerProperty inventoryCountProperty() {
+        return inventoryCount;
+    }
+
+    @Override
+    public String getName() {
+        return getModifierName();
+    }
+
+    @Override
+    public Double getPrice() {
+        return price.get();
     }
 }

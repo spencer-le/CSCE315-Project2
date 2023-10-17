@@ -11,21 +11,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import theAlleyPOS.DatabaseHelper;
-import theAlleyPOS.model.Cart;
-import theAlleyPOS.model.Session;
-import theAlleyPOS.DatabaseHelper;
-import theAlleyPOS.model.Item;
-import theAlleyPOS.model.Order;
+import theAlleyPOS.model.*;
 import javafx.scene.control.*;
 import java.io.IOException;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.binding.Bindings;
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemSelectionController {
     @FXML
@@ -79,17 +76,16 @@ public class ItemSelectionController {
     @FXML
     private ComboBox cmbCoupon;
 
-    private DatabaseHelper dbHelper;
-    private Cart cart;
+    private DatabaseHelper dbHelper = new DatabaseHelper();
     @FXML
     private Label totalPriceLabel;
 
 
     @FXML
-    private TableView<Item> orderTable;
+    private TableView<Orderable> orderTable;
 
     @FXML
-    private TableColumn<Item, Double> priceColumn;
+    private TableColumn<Orderable, Double> priceColumn;
 
     private SimpleDoubleProperty totalProperty = new SimpleDoubleProperty(0.0);
 
@@ -151,18 +147,24 @@ public class ItemSelectionController {
 
     @FXML
     public void handlePearlsClick(ActionEvent actionEvent) {
+        addModifierToOrder("Pearls");
     }
 
     @FXML
     public void handleSnowVelvetClick(ActionEvent actionEvent) {
+        addModifierToOrder("Snow Velvet");
     }
 
     @FXML
     public void handleSweetnessChange(ActionEvent actionEvent) {
+        String selectedSweetness = (String) cmbSweetness.getSelectionModel().getSelectedItem();
+        addModifierToOrder(selectedSweetness);
     }
 
     @FXML
     public void handleIceLevelChange(ActionEvent actionEvent) {
+        String selectedIceLevel = (String) cmbIceLevel.getSelectionModel().getSelectedItem();
+        addModifierToOrder(selectedIceLevel);
     }
 
     @FXML
@@ -174,37 +176,48 @@ public class ItemSelectionController {
     public void handleCardClick(ActionEvent actionEvent) {
         completeOrder();
     }
+    private List<Modifier> selectedModifiers = new ArrayList<>();
+
 
     private void completeOrder() {
         DatabaseHelper dbHelper = new DatabaseHelper();
 
-        // Create a new order
-        SimpleIntegerProperty newID = dbHelper.getNewOrderID();
+        // Extract the int value from newID
+        int orderId = dbHelper.getNewOrderID().get();
         LocalDateTime currentDateTime = LocalDateTime.now();
-        Order newOrder = new Order(newID, "Customer " + newID.get(), currentDateTime, totalProperty);
+
+        // Extract the double value from totalProperty
+        double totalCost = totalProperty.get();
+
+        Order newOrder = new Order(orderId, "Customer " + orderId, currentDateTime, totalCost);
         dbHelper.addOrder(newOrder);
 
-        for (Item item : orderedItems) {
-            dbHelper.decrementItemInventory(item.getItemName());
+        for (Orderable orderable : orderedItems) {
+            if (orderable instanceof Item) {
+                dbHelper.decrementItemInventory(orderable.getName());
+            } else if (orderable instanceof Modifier) {
+                dbHelper.decrementModifierInventory(orderable.getName());
+            }
         }
+
         orderedItems.clear();
         totalProperty.set(0.0);
     }
 
-    private ObservableList<Item> orderedItems = FXCollections.observableArrayList();
+    private ObservableList<Orderable> orderedItems = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<Item, String> itemColumn;
+    private TableColumn<Orderable, String> itemColumn;
 
     @FXML
-    private TableColumn<Item, Integer> deleteColumn;
+    private TableColumn<Orderable, Integer> deleteColumn;
 
     @FXML
     private void initialize() {
         orderTable.setItems(orderedItems);
         totalLabel.textProperty().bind(Bindings.format("Total: $%.2f", totalProperty));
-        itemColumn.setCellValueFactory(new PropertyValueFactory<Item, String>("itemName"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Item, Double>("price"));
+        itemColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
 
         deleteColumn.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("Delete");
@@ -221,9 +234,16 @@ public class ItemSelectionController {
                 } else {
                     setAlignment(Pos.CENTER);
                     deleteButton.setOnAction(event -> {
-                        Item itemToDelete = getTableView().getItems().get(getIndex());
-                        totalProperty.set(totalProperty.get() - itemToDelete.getPrice());
-                        orderedItems.remove(itemToDelete);
+                        Orderable orderableToDelete = getTableView().getItems().get(getIndex());
+                        if (orderableToDelete instanceof Item) {
+                            Item itemToDelete = (Item) orderableToDelete;
+                            totalProperty.set(totalProperty.get() - itemToDelete.getPrice());
+                            orderedItems.remove(itemToDelete);
+                        } else if (orderableToDelete instanceof Modifier) {
+                            Modifier modifierToDelete = (Modifier) orderableToDelete;
+                            totalProperty.set(totalProperty.get() - modifierToDelete.getPrice());
+                            orderedItems.remove(modifierToDelete);
+                        }
                     });
                     setGraphic(deleteButton);
                 }
@@ -290,6 +310,16 @@ public class ItemSelectionController {
         }
         else {
             System.out.println("Failed to fetch item details for " + itemName);
+        }
+    }
+
+    private void addModifierToOrder(String modifierName) {
+        Modifier modifier = dbHelper.getModifierByName(modifierName);
+        if (modifier != null) {
+            orderedItems.add(modifier);
+            totalProperty.set(totalProperty.get() + modifier.getPrice());
+        } else {
+            System.out.println("Failed to fetch modifier details for " + modifierName);
         }
     }
 }

@@ -21,13 +21,11 @@ public class CashierTimeClockController {
         switch (buttonText) {
             case "Clock In":
                 // Takes user to item selection screen
-                System.out.println("Clocking In...");
                 loadItemSelectionScreen(actionEvent);
                 break;
 
             case "Clock Out":
                 // Takes user back to login screen
-                System.out.println("Clocking Out...");
                 loadLoginScreen(actionEvent);
                 break;
         }
@@ -41,13 +39,11 @@ public class CashierTimeClockController {
         switch (buttonText) {
             case "Break In":
                 // Takes user to item selection screen
-                System.out.println("Breaking In...");
                 loadItemSelectionScreen(actionEvent);
                 break;
 
             case "Break Out":
                 // Takes user back to login screen
-                System.out.println("Breaking Out...");
                 loadLoginScreen(actionEvent);
                 break;
         }

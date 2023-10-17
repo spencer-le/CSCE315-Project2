@@ -3,7 +3,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Item {
+public class Item implements Orderable {
     private SimpleIntegerProperty id;
     private SimpleStringProperty itemName;
     private SimpleDoubleProperty price;
@@ -47,10 +47,6 @@ public class Item {
         this.itemName.set(itemName);
     }
 
-    public double getPrice() {
-        return price.get();
-    }
-
     public SimpleDoubleProperty priceProperty() {
         return price;
     }
@@ -69,5 +65,15 @@ public class Item {
 
     public void setInventoryCount(int inventoryCount) {
         this.inventoryCount.set(inventoryCount);
+    }
+
+    @Override
+    public String getName() {
+        return getItemName();
+    }
+
+    @Override
+    public Double getPrice() {
+        return price.get();
     }
 }

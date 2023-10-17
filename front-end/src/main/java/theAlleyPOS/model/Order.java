@@ -4,8 +4,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import java.time.LocalDateTime; // Import LocalDateTime from java.time package
+import java.time.LocalDateTime;
 
 public class Order {
     private SimpleIntegerProperty id;
@@ -20,11 +19,11 @@ public class Order {
         this.totalCost = new SimpleDoubleProperty();
     }
 
-    public Order(SimpleIntegerProperty id, String customerName, LocalDateTime orderDate, SimpleDoubleProperty totalCost) {
-        this.id = id;
+    public Order(int id, String customerName, LocalDateTime orderDate, double totalCost) {
+        this.id = new SimpleIntegerProperty(id);
         this.customerName = new SimpleStringProperty(customerName);
         this.orderDate = new SimpleObjectProperty<>(orderDate);
-        this.totalCost = totalCost;
+        this.totalCost = new SimpleDoubleProperty(totalCost);
     }
 
     public int getId() {

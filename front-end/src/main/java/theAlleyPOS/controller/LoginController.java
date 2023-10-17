@@ -3,6 +3,7 @@ package theAlleyPOS;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
@@ -24,26 +25,32 @@ public class LoginController {
     public void handleLogin(ActionEvent actionEvent) {
         String input = employeeID.getText();
 
-        // Check for valid input length
-        if (input == null || input.length() != 4 || input.equals("----")) {
+        try {
+            // Check for valid input length
+            if (input == null || input.length() != 4 || input.equals("----")) {
+                throw new IllegalArgumentException("Invalid input length! Try again.");
+            }
+
+            theAlleyPOS.DatabaseHelper dbHelper = new theAlleyPOS.DatabaseHelper();
+            UserRole role = dbHelper.validateUser(input);
+
+            if (role == UserRole.MANAGER) {
+                Session.setManager(true);
+                loadManagerTimeClockScreen(actionEvent);
+            } else if (role == UserRole.EMPLOYEE) {
+                Session.setManager(false);
+                loadEmployeeTimeClockScreen(actionEvent);
+            } else {
+                throw new IllegalArgumentException("Incorrect Input! Try again.");
+            }
+
+        } catch (IllegalArgumentException e) {
             employeeID.setText("----");
-            System.out.println("Invalid input length! Try again.");
-            return; // Exit early
-        }
-
-        theAlleyPOS.DatabaseHelper dbHelper = new theAlleyPOS.DatabaseHelper();
-
-        UserRole role = dbHelper.validateUser(input);
-
-        if (role == UserRole.MANAGER) {
-            Session.setManager(true);
-            loadManagerTimeClockScreen(actionEvent);
-        } else if (role == UserRole.EMPLOYEE) {
-            Session.setManager(false);
-            loadEmployeeTimeClockScreen(actionEvent);
-        } else {
-            employeeID.setText("----");
-            System.out.println("Incorrect Input! Try again.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 

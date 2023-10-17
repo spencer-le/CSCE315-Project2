@@ -5,12 +5,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import java.util.Date;
+import java.time.LocalDateTime; // Import LocalDateTime from java.time package
 
 public class Order {
     private SimpleIntegerProperty id;
     private SimpleStringProperty customerName;
-    private SimpleObjectProperty<Date> orderDate;
+    private SimpleObjectProperty<LocalDateTime> orderDate; // Change Date to LocalDateTime
     private SimpleDoubleProperty totalCost;
 
     public Order() {
@@ -20,11 +20,11 @@ public class Order {
         this.totalCost = new SimpleDoubleProperty();
     }
 
-    public Order(int id, String customerName, Date orderDate, double totalCost) {
-        this.id = new SimpleIntegerProperty(id);
+    public Order(SimpleIntegerProperty id, String customerName, LocalDateTime orderDate, SimpleDoubleProperty totalCost) {
+        this.id = id;
         this.customerName = new SimpleStringProperty(customerName);
         this.orderDate = new SimpleObjectProperty<>(orderDate);
-        this.totalCost = new SimpleDoubleProperty(totalCost);
+        this.totalCost = totalCost;
     }
 
     public int getId() {
@@ -51,15 +51,15 @@ public class Order {
         this.customerName.set(customerName);
     }
 
-    public Date getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate.get();
     }
 
-    public SimpleObjectProperty<Date> orderDateProperty() {
+    public SimpleObjectProperty<LocalDateTime> orderDateProperty() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate.set(orderDate);
     }
 

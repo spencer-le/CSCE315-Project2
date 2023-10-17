@@ -1,5 +1,6 @@
 package theAlleyPOS.controller;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,10 +19,13 @@ import theAlleyPOS.model.Cart;
 import theAlleyPOS.model.Session;
 import theAlleyPOS.DatabaseHelper;
 import theAlleyPOS.model.Item;
+import theAlleyPOS.model.Order;
 import javafx.scene.control.*;
 import java.io.IOException;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.binding.Bindings;
+import java.time.LocalDateTime;
+
 
 public class ItemSelectionController {
     @FXML
@@ -173,6 +177,13 @@ public class ItemSelectionController {
 
     private void completeOrder() {
         DatabaseHelper dbHelper = new DatabaseHelper();
+
+        // Create a new order
+        SimpleIntegerProperty newID = dbHelper.getNewOrderID();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Order newOrder = new Order(newID, "Customer " + newID.get(), currentDateTime, totalProperty);
+        dbHelper.addOrder(newOrder);
+
         for (Item item : orderedItems) {
             dbHelper.decrementItemInventory(item.getItemName());
         }

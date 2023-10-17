@@ -1,5 +1,7 @@
 package theAlleyPOS;
+import javafx.beans.property.SimpleIntegerProperty;
 import theAlleyPOS.model.Item;
+import theAlleyPOS.model.Order;
 import theAlleyPOS.model.UserRole;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -154,6 +156,46 @@ public class DatabaseHelper {
         }
         return items;
     }
+
+    public SimpleIntegerProperty getNewOrderID() {
+        String sql = "SELECT COUNT(*) FROM orders";
+        SimpleIntegerProperty newID = new SimpleIntegerProperty(); // Initialize newID
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int count = rs.getInt(1);
+                    newID.set(count + 1); // Set the value of newID
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newID;
+    }
+
+    public void addOrder(Order order) {
+//        INSERT INTO orders (id, customer_name, order_date, total_cost) VALUES (1, 'Spencer', '2023-10-16 14:30:00', 10.0);
+        String sql = "INSERT INTO orders (id, customer_name, order_date, total_cost) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, order.getId());
+            pstmt.setString(2, order.getCustomerName());
+            pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(order.getOrderDate()));
+            pstmt.setDouble(4, order.getTotalCost());
+//            pstmt.setInt(1, 2); // ID
+//            pstmt.setString(2, "Le"); // Customer Name
+//            pstmt.setString(3, "2023-10-16 14:30:00"); // Order Date in the specified format
+//            pstmt.setDouble(4, 11.0); // Total Cost
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 /*

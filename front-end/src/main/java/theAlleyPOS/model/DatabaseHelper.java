@@ -96,7 +96,8 @@ public class DatabaseHelper {
         Random random = new Random();
         FileWriter myWriter_order = null;
         FileWriter myWriter_ordered_items = null;
-
+        double[] drink_prices = {5.30, 6.30, 6.30, 6.30, 5.30, 5.80, 5.80, 7.30, 7.30, 3.80,
+                3.30, 4.30, 4.30, 3.80, 5.30, 8.80, 8.80};
         try { //create file for order table
             File myObj = new File("order_year_data.csv");
             if (myObj.exists() && myObj.delete()) {
@@ -109,13 +110,10 @@ public class DatabaseHelper {
                 System.out.println("Failed to create file");
             }
 
-            myWriter_order = new FileWriter("order_year_data.csv");
+            myWriter_order = new FileWriter("order_year_data.csv", true);
             myWriter_order.write("Id, customer_name, order_date, total_cost, bags, napkins\n");
-        } catch (IOException var12) {
-            System.out.println("An error occurred.");
-        }
 
-        try { //create file for ordered_items table
+            // create file for ordered_items table
             File myObj2 = new File("ordered_items_year_data.csv");
             if (myObj2.exists() && myObj2.delete()) {
                 System.out.println("File deleted: " + myObj2.getName());
@@ -127,14 +125,12 @@ public class DatabaseHelper {
                 System.out.println("Failed to create file");
             }
 
-            myWriter_order = new FileWriter("ordered_items_year_data.csv");
-            myWriter_order.write("Id, item, modifiers\n");
-        } catch (IOException var12) {
-            System.out.println("An error occurred.");
-        }
+            myWriter_ordered_items = new FileWriter("ordered_items_year_data.csv", true);
+            myWriter_ordered_items.write("Id, item, modifiers\n");
 
-        int order_id = 0;
-        int customers;
+
+            int order_id = 0;
+            int customers;
         for(int days = 0; days < 365; days++){ //days loop - determines day of order
             // Generate a random number between 20 and 100
             customers = random.nextInt((100 - 20 + 1) + 20);
@@ -180,59 +176,45 @@ public class DatabaseHelper {
                     }
                     int drink_choice = random.nextInt(17); // 0-16
                     double drink_price = 0;
-                    String sql = "SELECT price FROM items WHERE id = " + drink_choice;
-                    try (Connection conn = getConnection(); //this code block grabs the price from the drink table
-                         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                        try (ResultSet rs = pstmt.executeQuery()) {
-                            if(rs.next()){
-                                drink_price = rs.getDouble("price");
-                            }
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    drink_price = drink_prices[drink_choice];
+
                     order_total += drink_price; // adds total for order required in customer_loop
-                    try {
-                        myWriter_ordered_items = new FileWriter("ordered_items_year_data.csv");
-                        myWriter_ordered_items.write(order_id + "," + drink_choice + "," + modifiers + "\n");
-                    } catch (IOException var11) {
-                        System.out.println("An error occurred.");
-                    }
+
+                    myWriter_ordered_items.write(order_id + "," + drink_choice + "," + modifiers + "\n");
+
+
 
                     drinks_ordered--;
                 } // END OF DRINK LOOP
 
                 // remainder of customer loop is writing to file with total
 
-                try {
+
                     //write to orders csv: order_id, customer_name, order_date, order_total, bags, napkins
-                    myWriter_order = new FileWriter("order_year_data.csv");
                     myWriter_order.write(order_id + ",Customer " + order_id + "," + order_time + "," + order_total
                             + "," + bag + "," + napkins + "\n");
-                } catch (IOException var11) {
-                    System.out.println("An error occurred.");
-                }
+
                 customers--;
                 order_id++; //order is complete
             } // END OF CUSTOMERS LOOP
         }
-        try {
-            if (myWriter_ordered_items != null) {
-                myWriter_ordered_items.close();
-            }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        try {
-            if (myWriter_order != null) {
-                myWriter_order.close();
+        } finally {
+            try {
+                if (myWriter_ordered_items != null) {
+                    myWriter_ordered_items.close();
+                }
+                if (myWriter_order != null) {
+                    myWriter_order.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
+        System.out.println("populate complete");
     }
+
     public UserRole validateUser(String ID) {
         if (isIDValid(ID, "Managers")) {
             return UserRole.MANAGER;

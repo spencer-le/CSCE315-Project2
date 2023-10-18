@@ -19,12 +19,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Map;
+
+/**
+ * @author Sebastian Oberg, Roshan Tayab
+ */
 public class AnalyticsController {
+    /**
+     * Lines 34 through 63 create the table buttons, columns, and tabs which will show the analytics
+     */
     public TextField minimumAmountField;
     public TableColumn columnItemId;
     public TableColumn columnItemName;
     public TableColumn columnItemAmount;
     public Button btnLoadItems;
+    @FXML
+    public Button btnLoadSales;
     @FXML
     private Button homeButton1;
     @FXML
@@ -33,8 +46,6 @@ public class AnalyticsController {
     private Button homeButton3;
     @FXML
     private Button homeButton4;
-    @FXML
-    private Button homeButton5;
     @FXML
     private TableView tableViewSalesReport;
     @FXML
@@ -45,13 +56,15 @@ public class AnalyticsController {
     private TableView tableViewExcess;
     @FXML
     private DatePicker startDatePickerExcess;
-    @FXML
-    private TableView tableViewSeasonal;
+
     @FXML
     private TableView tableViewSalesTogether;
     @FXML
     private TableView tableViewRestockReport;
 
+    /**
+     * This initialize function creates the columns for the table and names them
+     */
     @FXML
     public void initialize() {
         columnItemId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -59,6 +72,64 @@ public class AnalyticsController {
         columnItemAmount.setCellValueFactory(new PropertyValueFactory<>("inventoryCount"));
     }
 
+    /**
+     * The loadSalesReportByDate function organizes and displays the sales in between dates
+     */
+    public void loadSalesReportByDate() {
+        LocalDate beginDate = beginDateSalesReport.getValue();
+        LocalDate endDate = endDateSalesReport.getValue();
+        //TODO: add support for getting the hour and minutes?
+
+        if (beginDate == null || endDate == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Error: Please select both a start and an end date.");
+            alert.showAndWait();
+            return;
+        }
+
+        // convert to timestamps for query
+        // Convert LocalDate to java.util.Date
+        java.util.Date beginUtilDate = java.util.Date.from(beginDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        java.util.Date endUtilDate = java.util.Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        // Convert java.util.Date to java.sql.Timestamp
+//        Timestamp beginTimestamp = new Timestamp(beginUtilDate.getTime());
+//        Timestamp endTimestamp = new Timestamp(endUtilDate.getTime());
+
+        Timestamp beginTimestamp = Timestamp.valueOf("2023-10-17 17:00:00"); // Replace with your desired start timestamp
+        Timestamp endTimestamp = Timestamp.valueOf("2023-10-17 21:09:15.31785");
+
+        // Print LocalDate and Timestamp values
+//        System.out.println("Begin LocalDate: " + beginDate);
+//        System.out.println("End LocalDate: " + endDate);
+//        System.out.println("Begin Timestamp: " + beginTimestamp);
+//        System.out.println("End Timestamp: " + endTimestamp);
+
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        List<Integer> ordersByDate = dbHelper.ordersByDate(beginTimestamp, endTimestamp);
+
+        //TODO: go through order_items table, get list of item IDs
+        List<Integer> itemIds = dbHelper.getItemIdsByOrderIds(ordersByDate);
+        for (Integer orderId : itemIds) {
+            System.out.println("Order ID: " + orderId);
+        }
+
+        //TODO: using item IDs, sum up total sales
+        Map<Integer, Integer> frequency = dbHelper.calculateItemFrequency(itemIds);
+
+//        tableViewSalesReport.setItems(observableList);
+    }
+    public void handleLoadSalesClick(ActionEvent actionEvent) {
+        loadSalesReportByDate();
+    }
+
+
+    /**
+     * The loadRestockItems function takes in a minimum number from the user, and returns all items whose inventory is
+     * less than this number, using a DatabaseHelper.
+     */
     public void loadRestockItems() {
         int minAmount;
         try {
@@ -85,7 +156,10 @@ public class AnalyticsController {
         tableViewRestockReport.setItems(observableList);
     }
 
-
+    /**
+     * The loadManagerTimeClockScreen function changes scenes to the home screen for the current manager.\
+     * @param event
+     */
     private void loadManagerTimeClockScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/ManagerTimeClock.fxml"));
@@ -102,85 +176,21 @@ public class AnalyticsController {
         }
     }
 
+    /**
+     * The handleHomeButton function uses FXML to send the user back to the home screen when the button is pressed
+     * @param actionEvent
+     */
     @FXML
     public void handleHomeButton(ActionEvent actionEvent) {
         loadManagerTimeClockScreen(actionEvent);
     }
 
+    /**
+     * The handleLoadItemsClick function also uses FXML to load the items which need to be restocked.
+     * @param actionEvent
+     */
     @FXML
     public void handleLoadItemsClick(ActionEvent actionEvent) {
         loadRestockItems();
     }
 }
-
-//    public void handleExcessReport(int begin_date){
-//        //takes in the beginning date until the current day (day 365)
-//        theAlleyPOS.DatabaseHelper dbHelper = new theAlleyPOS.DatabaseHelper();
-//        dbHelper.fetchItemsBelowInventoryCount(/*begin*.10*/); //needs beginning inventory
-//
-//        /*
-//        *** Need to add items ordered to dataset/inventory count on a given day
-//        * for each item in the database
-//        * find out how many were sold
-//        * beginning inventory = (current_inventory_count + COUNT(how many were sold))
-//        * if ((how many sold / beginning inventory) < .10 ){
-//        *   add to report
-//        * }
-//        *  */
-//        List<Item> items = new ArrayList<>();
-//        String sql = "SELECT item_name FROM items ORDER BY id";
-//        try (Connection conn = getConnection();
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             ResultSet rs = pstmt.executeQuery()) {
-//            sql = "SELECT item_name FROM items ORDER BY id";
-//            while (rs.next()) {
-//                pstmt = conn.prepareStatement(sql)
-//                //items.add(new Item(rs.getInt("id"), rs.getString("item_name"), rs.getDouble("price"), rs.getInt("inventory_count")));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        List<Item> items = new ArrayList<>();
-//        String sql = "SELECT * FROM items ORDER BY id";
-//
-//        try (Connection conn = getConnection();
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             ResultSet rs = pstmt.executeQuery()) {
-//
-//            while (rs.next()) {
-//                items.add(new Item(rs.getInt("id"), rs.getString("item_name"), rs.getDouble("price"), rs.getInt("inventory_count")));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return items;
-//    }
-//}

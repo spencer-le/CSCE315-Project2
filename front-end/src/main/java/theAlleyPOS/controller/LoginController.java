@@ -13,7 +13,13 @@ import theAlleyPOS.model.UserRole;
 
 import java.io.IOException;
 
+/**
+ * @author Sebastian Oberg, Grant Shields, Blake Dugan
+ */
 public class LoginController {
+    /**
+     * Lines 23 through 29 create the required buttons for the number pad on the login screen
+     */
     @FXML
     private TextField employeeID;
 
@@ -22,6 +28,11 @@ public class LoginController {
             sixButton, sevenButton, eightButton, nineButton, zeroButton,
             deleteButton, enterButton;
 
+    /**
+     * The handleLogin function uses a DatabaseHelper and UserRole to determine if the input password matches one listed
+     * in the database. If it does, then employees and managers are sent to their respective screens.
+     * @param actionEvent
+     */
     public void handleLogin(ActionEvent actionEvent) {
         String input = employeeID.getText();
 
@@ -54,6 +65,12 @@ public class LoginController {
         }
     }
 
+    /**
+     * The handleNumberButton reads the users selected button. When Delete is pressed, it removes one number if there are
+     * any to delete. When enter is pressed, it calls the handleLogin function. If a number is pressed then it is added
+     * to the screen.
+     * @param actionEvent
+     */
     @FXML
     public void handleNumberButton(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getSource();
@@ -82,6 +99,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * This loadEmployeeTimeClockScreen function changes the current scene and stage from login controller to the
+     * manager time clock screen using FXML
+     * @param event
+     */
     private void loadEmployeeTimeClockScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/CashierTimeClock.fxml"));
@@ -98,6 +120,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * This loadManagerTimeClockScreen function changes the current scene and stage from login controller to the
+     * manager time clock screen using FXML
+     * @param event
+     */
     private void loadManagerTimeClockScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/ManagerTimeClock.fxml"));

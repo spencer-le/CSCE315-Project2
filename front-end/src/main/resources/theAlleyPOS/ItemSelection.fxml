@@ -189,6 +189,13 @@
                             </AnchorPane>
                         </content>
                     </Tab>
+                    <Tab text="Other">
+                        <TableView fx:id="otherTable" style="-fx-background-color: derive(-fx-base, 20%);">
+                            <columns>
+                                <TableColumn fx:id="otherItemColumn" prefWidth="545" text="Other Items" />
+                            </columns>
+                        </TableView>
+                    </Tab>
                 </tabs>
             </TabPane>
         </ScrollPane>
@@ -197,9 +204,9 @@
                 <Label fx:id="totalLabel" style="-fx-font-size: 20px; -fx-padding: 10px;" text="Total: $0.00" />
                 <TableView fx:id="orderTable">
                     <columns>
-                        <TableColumn fx:id="itemColumn" text="Item" prefWidth="125.0" />
-                        <TableColumn fx:id="priceColumn" text="Price" prefWidth="60.0" />
-                        <TableColumn fx:id="deleteColumn" text="" prefWidth="60.0" />
+                        <TableColumn fx:id="cartItemColumn" prefWidth="125.0" text="Item" />
+                        <TableColumn fx:id="priceColumn" prefWidth="60.0" text="Price" />
+                        <TableColumn fx:id="deleteColumn" prefWidth="60.0" text="" />
                     </columns>
                 </TableView>
             </children>
@@ -230,7 +237,6 @@
                                         </FXCollections>
                                     </items>
                                 </ComboBox>
-
                                 <ComboBox fx:id="cmbIceLevel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleIceLevelChange" prefHeight="30.0" prefWidth="100.0" promptText="Ice Level" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                     <items>
                                         <FXCollections fx:factory="observableArrayList">

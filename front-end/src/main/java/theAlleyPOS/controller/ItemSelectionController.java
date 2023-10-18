@@ -1,6 +1,5 @@
 package theAlleyPOS.controller;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,7 +23,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sebastian Oberg, Spencer Le, Blake Dugan
+ */
 public class ItemSelectionController {
+    /**
+     * Lines 34 through 90 create the buttons and boxes which will be displayed on the item selection screen, and lines 90
+     * through 102 initialize a database helper, table, column, price, and label variables.
+     */
     @FXML
     private Button btnSnowStrawberryLulu;
     @FXML
@@ -75,11 +81,14 @@ public class ItemSelectionController {
     private Button btnHome;
     @FXML
     private ComboBox cmbCoupon;
+    @FXML
+    private TableView<Item> otherTable;
+    @FXML
+    private TableColumn<Item, String> cartItemColumn;
+    @FXML
+    private TableColumn<Orderable, String> otherItemColumn;
 
     private DatabaseHelper dbHelper = new DatabaseHelper();
-    @FXML
-    private Label totalPriceLabel;
-
 
     @FXML
     private TableView<Orderable> orderTable;
@@ -92,6 +101,9 @@ public class ItemSelectionController {
     @FXML
     private Label totalLabel;
 
+    /**
+     * Lines 107 through 158 use the addItemToOrder function to handle the FXML commands for when item buttons are pressed
+     */
     @FXML
     public void handleSnowStrawberryLuluClick(ActionEvent actionEvent) { addItemToOrder("Snow Strawberry Lulu"); }
 
@@ -145,6 +157,10 @@ public class ItemSelectionController {
     @FXML
     public void handleMatchaDeeriocaMilkClick(ActionEvent actionEvent) { addItemToOrder("Matcha Brown Sugar Deerioca Fresh Milk"); }
 
+
+    /**
+     * Lines 164 through 184 use the function addModifierToOrder to handle the FXML commands for when item modifiers are pressed
+     */
     @FXML
     public void handlePearlsClick(ActionEvent actionEvent) {
         addModifierToOrder("Pearls");
@@ -167,6 +183,10 @@ public class ItemSelectionController {
         addModifierToOrder(selectedIceLevel);
     }
 
+    /**
+     * Lines 190 through 199 call completeOrder as soon as the cash or card buttons are pressed,
+     * which are determined with FXML
+     */
     @FXML
     public void handleCashClick(ActionEvent actionEvent) {
         completeOrder();
@@ -176,12 +196,13 @@ public class ItemSelectionController {
     public void handleCardClick(ActionEvent actionEvent) {
         completeOrder();
     }
-    private List<Modifier> selectedModifiers = new ArrayList<>();
+    // private List<Modifier> selectedModifiers = new ArrayList<>();
 
-
+    /**
+     * The completeOrder function uses DatabaseHelper from the model folder to access and alter the database.
+     * It creates a new order using the local time and total cost, and removes the ordered items from the inventory.
+     */
     private void completeOrder() {
-        DatabaseHelper dbHelper = new DatabaseHelper();
-
         // Extract the int value from newID
         int orderId = dbHelper.getNewOrderID().get();
         LocalDateTime currentDateTime = LocalDateTime.now();
@@ -191,6 +212,7 @@ public class ItemSelectionController {
 
         Order newOrder = new Order(orderId, "Customer " + orderId, currentDateTime, totalCost);
         dbHelper.addOrder(newOrder);
+
         for (Orderable orderable : orderedItems) {
             if (orderable instanceof Item) {
                 dbHelper.decrementItemInventory(orderable.getName());
@@ -207,17 +229,42 @@ public class ItemSelectionController {
     private ObservableList<Orderable> orderedItems = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<Orderable, String> itemColumn;
-
-    @FXML
     private TableColumn<Orderable, Integer> deleteColumn;
 
+    /**
+     * The initialize function lays out the table values for the current order, and uses the overridden updateItem
+     * function to add items and modifiers to the screen as they are removed from the orderedItems list
+     */
     @FXML
     private void initialize() {
         orderTable.setItems(orderedItems);
         totalLabel.textProperty().bind(Bindings.format("Total: $%.2f", totalProperty));
-        itemColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+
+        cartItemColumn.setCellValueFactory(cellData -> {
+            Orderable orderable = cellData.getValue();
+            if (orderable instanceof Item) {
+                return new SimpleStringProperty(((Item) orderable).getName());
+            } else if (orderable instanceof Modifier) {
+                return new SimpleStringProperty(((Modifier) orderable).getName());
+            }
+            return new SimpleStringProperty("");
+        });
+
+        priceColumn.setCellValueFactory(cellData -> {
+            Orderable orderable = cellData.getValue();
+            double price;
+            if (orderable instanceof Item) {
+                price = ((Item) orderable).getPrice();
+            } else if (orderable instanceof Modifier) {
+                price = ((Modifier) orderable).getPrice();
+            } else {
+                price = 0.0;
+            }
+            return new SimpleDoubleProperty(price).asObject();
+        });
+
+        initializeOtherTable();
+        fetchAndDisplayItemsFromDatabase();
 
         deleteColumn.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("Delete");
@@ -250,7 +297,41 @@ public class ItemSelectionController {
             }
         });
     }
+    /**
+     * The fetchAndDisplayItemsFromDatabase function uses the DatabaseHelper to display all items
+     */
+    private void fetchAndDisplayItemsFromDatabase() {
+        ObservableList<Item> items = FXCollections.observableArrayList();
 
+        // Use the fetchItems method from your DatabaseHelper class
+        List<Item> itemList = dbHelper.fetchOtherItems();
+
+        if (itemList != null && !itemList.isEmpty()) {
+            items.addAll(itemList);
+        }
+
+        otherTable.setItems(items);
+    }
+
+    /**
+     * The initializeOtherTable function creates another temporary table to hold the current items
+     */
+    private void initializeOtherTable() {
+        otherItemColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+
+        otherTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1 && otherTable.getSelectionModel().getSelectedItem() != null) {
+                Item selectedItem = otherTable.getSelectionModel().getSelectedItem();
+                addItemToOrder(selectedItem.getName());
+            }
+        });
+    }
+
+    /**
+     * The handleHomeClick function determines which time clock screen to return the user to, depending on if they are a
+     * manager or employee.
+     * @param actionEvent
+     */
     @FXML
     public void handleHomeClick(ActionEvent actionEvent) {
         if (Session.isManager())
@@ -269,6 +350,11 @@ public class ItemSelectionController {
     public void handleCouponChange(ActionEvent actionEvent) {
     }
 
+    /**
+     * The loadEmployeeTimeClockScreen, and the loadManagerTimeClockScreen functions change scenes to the appropriate
+     * home screen for the respective employee or manager.
+     * @param event
+     */
     private void loadEmployeeTimeClockScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/CashierTimeClock.fxml"));
@@ -301,8 +387,12 @@ public class ItemSelectionController {
         }
     }
 
+    /**
+     * The addItemToOrder function uses the DatabaseHelper class to retrieve the item and its properties from the database,
+     * and updates the total price. The addModifierToOrder function under it does the same for modifiers
+     * @param itemName
+     */
     private void addItemToOrder(String itemName) {
-        DatabaseHelper dbHelper = new DatabaseHelper();
         Item item = dbHelper.getItemByName(itemName);
         if (item != null) {
             orderedItems.add(item);

@@ -185,6 +185,8 @@ public class AnalyticsController {
 
         TableColumn<Map.Entry<Integer, Integer>, Integer> frequencyColumn = new TableColumn<>("Frequency");
         frequencyColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getValue()).asObject());
+        frequencyColumn.setSortType(TableColumn.SortType.DESCENDING); // Specify sorting order
+        frequencyColumn.setSortable(true);
 
         tableViewSalesTogether.getColumns().setAll(itemIdColumn, itemNameColumn, frequencyColumn);
         tableViewSalesTogether.setItems(observableData);

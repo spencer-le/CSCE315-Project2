@@ -6,12 +6,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import java.time.LocalDateTime;
 
+/**
+ * @author Spencer Le, Sebastian Oberg
+ */
 public class Order {
     private SimpleIntegerProperty id;
     private SimpleStringProperty customerName;
     private SimpleObjectProperty<LocalDateTime> orderDate; // Change Date to LocalDateTime
     private SimpleDoubleProperty totalCost;
 
+    /**
+     * Default constructor
+     */
     public Order() {
         this.id = new SimpleIntegerProperty();
         this.customerName = new SimpleStringProperty();
@@ -19,6 +25,13 @@ public class Order {
         this.totalCost = new SimpleDoubleProperty();
     }
 
+    /**
+     * Parameterized constructor
+     * @param id
+     * @param customerName
+     * @param orderDate
+     * @param totalCost
+     */
     public Order(int id, String customerName, LocalDateTime orderDate, double totalCost) {
         this.id = new SimpleIntegerProperty(id);
         this.customerName = new SimpleStringProperty(customerName);
@@ -26,6 +39,10 @@ public class Order {
         this.totalCost = new SimpleDoubleProperty(totalCost);
     }
 
+    /**
+     * The rest of the following are getters and setters for the Order class
+     * @return
+     */
     public int getId() {
         return id.get();
     }

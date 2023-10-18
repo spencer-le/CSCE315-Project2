@@ -8,17 +8,21 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/**
+ * @author Sebastian Oberg
+ */
 public class CashierTimeClockController {
 
-    /*
-    Line 17 creates all the required buttons for the cashier time clock (home page)
+    /**
+     * Line 20 creates all the required buttons for the cashier time clock (home page)
      */
     @FXML
     private Button clockInButton, breakInButton, clockOutButton, breakOutButton;
 
-    /*
-    The handleClockInOut function sends the user to the item selection screen if "clock in" is chosen, and sends
-    them to the login screen if "clock out" is chosen.
+    /**
+     * The handleClockInOut function sends the user to the item selection screen if "clock in" is chosen, and sends
+     * them to the login screen if "clock out" is chosen.
+     * @param actionEvent
      */
     @FXML
     public void handleClockInOut(ActionEvent actionEvent) {
@@ -38,9 +42,10 @@ public class CashierTimeClockController {
         }
     }
 
-    /*
-    The handleBreakInOut function does the same thing as the handleClockInOut function, except "break in" is used in
-    place of "clock in" and "break out" is used in the place of "clock out".
+    /**
+     * The handleBreakInOut function does the same thing as the handleClockInOut function, except "break in" is used in
+     * place of "clock in" and "break out" is used in the place of "clock out".
+     * @param actionEvent
      */
     @FXML
     public void handleBreakInOut(ActionEvent actionEvent) {
@@ -60,8 +65,9 @@ public class CashierTimeClockController {
         }
     }
 
-    /*
-    The loadLoginScreen function changes the FXML scene and stage to that of the login screen.
+    /**
+     * The loadLoginScreen function changes the FXML scene and stage to that of the login screen.
+     * @param event
      */
     private void loadLoginScreen(ActionEvent event) {
         try {
@@ -79,8 +85,9 @@ public class CashierTimeClockController {
         }
     }
 
-    /*
-    The loadItemSelectionScreen function also uses FXML to change stages and scenes to the item selection screen
+    /**
+     * The loadItemSelectionScreen function also uses FXML to change stages and scenes to the item selection screen
+     * @param event
      */
     private void loadItemSelectionScreen(ActionEvent event) {
         try {

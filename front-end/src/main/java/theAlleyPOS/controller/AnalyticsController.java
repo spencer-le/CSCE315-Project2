@@ -25,10 +25,13 @@ import java.time.ZoneId;
 import java.util.Map;
 import javafx.beans.property.SimpleIntegerProperty;
 
-/*
-Lines 25 through 56 create the table buttons, columns, and tabs which will show the analytics
+/**
+ * @author Sebastian Oberg, Roshan Tayab
  */
 public class AnalyticsController {
+    /**
+     * Lines 34 through 63 create the table buttons, columns, and tabs which will show the analytics
+     */
     public TextField minimumAmountField;
     public TableColumn columnItemId;
     public TableColumn columnItemName;
@@ -60,8 +63,8 @@ public class AnalyticsController {
     @FXML
     private TableView tableViewRestockReport;
 
-    /*
-    This initialize function creates the columns for the table and names them
+    /**
+     * This initialize function creates the columns for the table and names them
      */
     @FXML
     public void initialize() {
@@ -70,6 +73,9 @@ public class AnalyticsController {
         columnItemAmount.setCellValueFactory(new PropertyValueFactory<>("inventoryCount"));
     }
 
+    /**
+     * The loadSalesReportByDate function organizes and displays the sales in between dates
+     */
     public void loadSalesReportByDate() {
         LocalDate beginDate = beginDateSalesReport.getValue();
         LocalDate endDate = endDateSalesReport.getValue();
@@ -123,9 +129,9 @@ public class AnalyticsController {
     }
 
 
-    /*
-    The loadRestockItems function takes in a minimum number from the user, and returns all items whose inventory is
-    less than this number, using a DatabaseHelper.
+    /**
+     * The loadRestockItems function takes in a minimum number from the user, and returns all items whose inventory is
+     * less than this number, using a DatabaseHelper.
      */
     public void loadRestockItems() {
         int minAmount;
@@ -153,8 +159,9 @@ public class AnalyticsController {
         tableViewRestockReport.setItems(observableList);
     }
 
-    /*
-    The loadManagerTimeClockScreen function changes scenes to the home screen for the current manager.
+    /**
+     * The loadManagerTimeClockScreen function changes scenes to the home screen for the current manager.\
+     * @param event
      */
     private void loadManagerTimeClockScreen(ActionEvent event) {
         try {
@@ -172,16 +179,18 @@ public class AnalyticsController {
         }
     }
 
-    /*
-    The handleHomeButton function uses FXML to send the user back to the home screen when the button is pressed
+    /**
+     * The handleHomeButton function uses FXML to send the user back to the home screen when the button is pressed
+     * @param actionEvent
      */
     @FXML
     public void handleHomeButton(ActionEvent actionEvent) {
         loadManagerTimeClockScreen(actionEvent);
     }
 
-    /*
-    The handleLoadItemsClick function also uses FXML to load the items which need to be restocked.
+    /**
+     * The handleLoadItemsClick function also uses FXML to load the items which need to be restocked.
+     * @param actionEvent
      */
     @FXML
     public void handleLoadItemsClick(ActionEvent actionEvent) {

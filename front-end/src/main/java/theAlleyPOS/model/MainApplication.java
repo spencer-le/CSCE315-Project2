@@ -7,8 +7,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @author Sebastian Oberg
+ */
 public class
 MainApplication extends Application {
+    /**
+     * This start function is what initiates the entire system
+     * @param primaryStage
+     * @throws IOException
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/theAlleyPOS/Login.fxml"));
@@ -18,6 +26,10 @@ MainApplication extends Application {
         primaryStage.show();
     }
 
+    /**
+     * This launches the main program
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }

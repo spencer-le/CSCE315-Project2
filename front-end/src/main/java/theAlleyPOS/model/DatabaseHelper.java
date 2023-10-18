@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
+//import java.time.LocalDate;
+//import java.time.ZoneId;
 
 public class DatabaseHelper {
 
@@ -49,6 +52,49 @@ public class DatabaseHelper {
             return false;
         }
     }
+
+    public List<Integer> ordersByDate(Timestamp beginTimestamp, Timestamp endTimestamp) {
+        List<Integer> orderIds = new ArrayList<>();
+        String sql = "SELECT id FROM Orders WHERE order_date BETWEEN ? AND ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setTimestamp(1, beginTimestamp);
+            pstmt.setTimestamp(2, endTimestamp);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    orderIds.add(rs.getInt("id"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orderIds;
+    }
+
+    public List<Integer> getItemIdsByOrderIds(List<Integer> orderIds) {
+        List<Integer> itemIds = new ArrayList<>();
+        String sql = "SELECT item_id FROM ordered_items WHERE order_id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (Integer orderId : orderIds) {
+                pstmt.setInt(1, orderId);
+                ResultSet rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+                    itemIds.add(rs.getInt("item_id"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return itemIds;
+    }
+
 
     public List<Item> fetchItems() {
         List<Item> items = new ArrayList<>();

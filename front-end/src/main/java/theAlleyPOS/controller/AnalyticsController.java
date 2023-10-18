@@ -72,6 +72,7 @@ public class AnalyticsController {
     public void loadSalesReportByDate() {
         LocalDate beginDate = beginDateSalesReport.getValue();
         LocalDate endDate = endDateSalesReport.getValue();
+        //TODO: add support for getting the hour and minutes?
 
         if (beginDate == null || endDate == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -88,8 +89,11 @@ public class AnalyticsController {
         java.util.Date endUtilDate = java.util.Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         // Convert java.util.Date to java.sql.Timestamp
-        Timestamp beginTimestamp = new Timestamp(beginUtilDate.getTime());
-        Timestamp endTimestamp = new Timestamp(endUtilDate.getTime());
+//        Timestamp beginTimestamp = new Timestamp(beginUtilDate.getTime());
+//        Timestamp endTimestamp = new Timestamp(endUtilDate.getTime());
+
+        Timestamp beginTimestamp = Timestamp.valueOf("2023-10-17 17:00:00"); // Replace with your desired start timestamp
+        Timestamp endTimestamp = Timestamp.valueOf("2023-10-17 21:09:15.31785");
 
         // Print LocalDate and Timestamp values
 //        System.out.println("Begin LocalDate: " + beginDate);
@@ -97,7 +101,16 @@ public class AnalyticsController {
 //        System.out.println("Begin Timestamp: " + beginTimestamp);
 //        System.out.println("End Timestamp: " + endTimestamp);
 
-//        DatabaseHelper dbHelper = new DatabaseHelper();
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        List<Integer> ordersByDate = dbHelper.ordersByDate(beginTimestamp, endTimestamp);
+
+        //TODO: go through order_items table, get list of item IDs
+        List<Integer> itemIds = dbHelper.getItemIdsByOrderIds(ordersByDate);
+        for (Integer orderId : itemIds) {
+            System.out.println("Order ID: " + orderId);
+        }
+
+        //TODO: using item IDs, sum up total sales
 //        List<Item> itemsBySales = dbHelper.itemsBySales(beginDate, endDate);
 //        ObservableList<Item> observableList = FXCollections.observableArrayList(itemsBySales);
 //        tableViewSalesReport.setItems(observableList);

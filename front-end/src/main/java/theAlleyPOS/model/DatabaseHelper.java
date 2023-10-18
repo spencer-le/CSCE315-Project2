@@ -641,7 +641,6 @@ public class DatabaseHelper {
      * @param order
      */
     public void addOrder(Order order) {
-//        INSERT INTO orders (id, customer_name, order_date, total_cost) VALUES (1, 'Spencer', '2023-10-16 14:30:00', 10.0);
         String sql = "INSERT INTO orders (id, customer_name, order_date, total_cost) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
@@ -650,10 +649,6 @@ public class DatabaseHelper {
             pstmt.setString(2, order.getCustomerName());
             pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(order.getOrderDate()));
             pstmt.setDouble(4, order.getTotalCost());
-//            pstmt.setInt(1, 2); // ID
-//            pstmt.setString(2, "Le"); // Customer Name
-//            pstmt.setString(3, "2023-10-16 14:30:00"); // Order Date in the specified format
-//            pstmt.setDouble(4, 11.0); // Total Cost
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -676,6 +671,85 @@ public class DatabaseHelper {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    public String getItemNamebyID(int id) {
+        String itemName = null;
+        String sql = "SELECT item_name FROM your_table_name WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                itemName = resultSet.getString("item_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return itemName;
+    }
+    public List<ItemPairFrequency> findItemPairFrequencies(int startOrderId, int endOrderId) {
+        List<ItemPairFrequency> itemPairFrequencies = new ArrayList<>();
+        String sql = "SELECT item1, item2, COUNT(*) AS frequency " +
+                "FROM (" +
+                "  SELECT o1.item_id AS item1, o2.item_id AS item2 " +
+                "  FROM ordered_items o1 " +
+                "  JOIN ordered_items o2 ON o1.order_id = o2.order_id " +
+                "  WHERE o1.item_id < o2.item_id " +
+                "    AND o1.order_id >= ? " +
+                "    AND o1.order_id <= ? " +
+                "    AND o2.order_id >= ? " +
+                "    AND o2.order_id <= ? " +
+                ") AS pairs " +
+                "GROUP BY item1, item2 " +
+                "ORDER BY frequency DESC";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, startOrderId);
+            preparedStatement.setInt(2, endOrderId);
+            preparedStatement.setInt(3, startOrderId);
+            preparedStatement.setInt(4, endOrderId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int item1 = resultSet.getInt("item1");
+                int item2 = resultSet.getInt("item2");
+                int frequency = resultSet.getInt("frequency");
+
+                ItemPairFrequency pairFrequency = new ItemPairFrequency(item1, item2, frequency);
+                itemPairFrequencies.add(pairFrequency);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return itemPairFrequencies;
+    }
+
+    public class ItemPairFrequency {
+        private int item1;
+        private int item2;
+        private int frequency;
+
+        public ItemPairFrequency(int item1, int item2, int frequency) {
+            this.item1 = item1;
+            this.item2 = item2;
+            this.frequency = frequency;
+        }
+
+        public int getItem1() {
+            return item1;
+        }
+
+        public int getItem2() {
+            return item2;
+        }
+
+        public int getFrequency() {
+            return frequency;
         }
     }
 }

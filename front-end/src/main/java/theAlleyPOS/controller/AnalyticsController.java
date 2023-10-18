@@ -16,13 +16,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Map;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -63,6 +61,10 @@ public class AnalyticsController {
 
     @FXML
     private TableView tableViewSalesTogether;
+    @FXML
+    private DatePicker beginWST;
+    @FXML
+    private DatePicker endWST;
     @FXML
     private TableView tableViewRestockReport;
 
@@ -140,6 +142,54 @@ public class AnalyticsController {
     public void handleLoadSalesClick(ActionEvent actionEvent) {
         loadSalesReportByDate();
     }
+
+    public void whatSalesTogether() {
+        LocalDate beginDate = beginWST.getValue();
+        LocalDate endDate = endWST.getValue();
+
+        if (beginDate == null || endDate == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Error: Please select both a start and an end date.");
+            alert.showAndWait();
+            return;
+        }
+
+        // convert to timestamps for query
+        // Convert LocalDate to java.util.Date
+        java.util.Date beginUtilDate = java.util.Date.from(beginDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        java.util.Date endUtilDate = java.util.Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        // Convert java.util.Date to java.sql.Timestamp
+        Timestamp beginTimestamp = new Timestamp(beginUtilDate.getTime());
+        Timestamp endTimestamp = new Timestamp(endUtilDate.getTime());
+
+
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        List<Integer> ordersByDate = dbHelper.ordersByDate(beginTimestamp, endTimestamp);
+        List<DatabaseHelper.ItemPairFrequency> itemPairFrequencies = dbHelper.findItemPairFrequencies(ordersByDate.get(0), ordersByDate.get(ordersByDate.size() - 1));
+
+        ObservableList<Map.Entry<Integer, Integer>> observableData = FXCollections.observableArrayList();
+        for (DatabaseHelper.ItemPairFrequency pairFrequency : itemPairFrequencies) {
+            Map.Entry<Integer, Integer> entry = new AbstractMap.SimpleEntry<>(pairFrequency.getItem1(), pairFrequency.getItem2());
+            observableData.add(entry);
+        }
+
+        // Define and set up your columns
+        TableColumn<Map.Entry<Integer, Integer>, Integer> itemIdColumn = new TableColumn<>("Item 1");
+        itemIdColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getKey()).asObject());
+
+        TableColumn<Map.Entry<Integer, Integer>, Integer> itemNameColumn = new TableColumn<>("Item 2");
+        itemNameColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getValue()).asObject());
+
+        TableColumn<Map.Entry<Integer, Integer>, Integer> frequencyColumn = new TableColumn<>("Frequency");
+        frequencyColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getValue()).asObject());
+
+        tableViewSalesTogether.getColumns().setAll(itemIdColumn, itemNameColumn, frequencyColumn);
+        tableViewSalesTogether.setItems(observableData);
+    }
+    public void handleWST(ActionEvent actionEvent) {whatSalesTogether();}
 
 
     /**

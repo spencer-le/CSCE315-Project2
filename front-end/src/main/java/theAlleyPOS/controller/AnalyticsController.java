@@ -24,6 +24,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Map;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 
 /**
  * @author Sebastian Oberg, Roshan Tayab
@@ -109,6 +112,11 @@ public class AnalyticsController {
 
         //TODO: using item IDs, sum up total sales
         Map<Integer, Integer> frequency = dbHelper.calculateItemFrequency(itemIds);
+
+        // Fetching item names and prices based on itemIds
+        Map<Integer, String> itemNameById = dbHelper.fetchItemNamesByIds(itemIds);
+        Map<Integer, Double> itemPriceById = dbHelper.fetchItemPricesByIds(itemIds);
+
         // Setting up the columns for tableViewSalesReport
         TableColumn<Map.Entry<Integer, Integer>, Integer> itemIdColumn = new TableColumn<>("Item ID");
         itemIdColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getKey()).asObject());
@@ -116,9 +124,14 @@ public class AnalyticsController {
         TableColumn<Map.Entry<Integer, Integer>, Integer> frequencyColumn = new TableColumn<>("Frequency");
         frequencyColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getValue()).asObject());
 
-        tableViewSalesReport.getColumns().setAll(itemIdColumn, frequencyColumn);
+        TableColumn<Map.Entry<Integer, Integer>, String> itemNameColumn = new TableColumn<>("Item Name");
+        itemNameColumn.setCellValueFactory(p -> new SimpleStringProperty(itemNameById.get(p.getValue().getKey())));
 
-        // Convert the frequencyMap to an ObservableList and set it to tableViewSalesReport
+        TableColumn<Map.Entry<Integer, Integer>, Double> revenueColumn = new TableColumn<>("Revenue");
+        revenueColumn.setCellValueFactory(p -> new SimpleDoubleProperty(p.getValue().getValue() * itemPriceById.get(p.getValue().getKey())).asObject());
+
+        tableViewSalesReport.getColumns().setAll(itemIdColumn, itemNameColumn, frequencyColumn, revenueColumn);
+
         ObservableList<Map.Entry<Integer, Integer>> data = FXCollections.observableArrayList(frequency.entrySet());
         tableViewSalesReport.setItems(data);
 

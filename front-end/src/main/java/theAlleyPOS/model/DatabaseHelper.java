@@ -20,6 +20,7 @@ import java.util.Random;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collections;
 
 /**
  * @author Sebastian Oberg, Spencer Le, Roshan Tayab, Grant Shields, Blake Dugan
@@ -325,6 +326,64 @@ public class DatabaseHelper {
         }
 
         return frequencyMap;
+    }
+
+    public Map<Integer, String> fetchItemNamesByIds(List<Integer> itemIds) {
+        Map<Integer, String> itemNameById = new HashMap<>();
+
+        if(itemIds.isEmpty()) {
+            return itemNameById; // Return empty map if no item IDs provided
+        }
+
+        String placeholders = String.join(", ", Collections.nCopies(itemIds.size(), "?")); // e.g. "?, ?, ?"
+        String sql = "SELECT id, item_name FROM items WHERE id IN (" + placeholders + ")";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (int i = 0; i < itemIds.size(); i++) {
+                pstmt.setInt(i + 1, itemIds.get(i));
+            }
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String itemName = rs.getString("item_name");
+                itemNameById.put(id, itemName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return itemNameById;
+    }
+
+    public Map<Integer, Double> fetchItemPricesByIds(List<Integer> itemIds) {
+        Map<Integer, Double> itemPriceById = new HashMap<>();
+
+        if(itemIds.isEmpty()) {
+            return itemPriceById; // Return empty map if no item IDs provided
+        }
+
+        String placeholders = String.join(", ", Collections.nCopies(itemIds.size(), "?")); // e.g. "?, ?, ?"
+        String sql = "SELECT id, price FROM items WHERE id IN (" + placeholders + ")";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            for (int i = 0; i < itemIds.size(); i++) {
+                pstmt.setInt(i + 1, itemIds.get(i));
+            }
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                double price = rs.getDouble("price");
+                itemPriceById.put(id, price);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return itemPriceById;
     }
 
 

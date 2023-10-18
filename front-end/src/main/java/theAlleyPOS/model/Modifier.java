@@ -5,6 +5,9 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * @author Sebastian Oberg, Spencer Le
+ */
 public class Modifier implements Orderable {
     private SimpleIntegerProperty id;
     private SimpleBooleanProperty pearls;
@@ -15,6 +18,9 @@ public class Modifier implements Orderable {
     private SimpleIntegerProperty inventoryCount;
     private SimpleStringProperty modifierName;
 
+    /**
+     * Default Constructor
+     */
     public Modifier() {
         this.id = new SimpleIntegerProperty();
         this.pearls = new SimpleBooleanProperty(false);
@@ -25,6 +31,13 @@ public class Modifier implements Orderable {
         this.inventoryCount = new SimpleIntegerProperty();
     }
 
+    /**
+     * Parameterized constructor
+     * @param id
+     * @param modifierName
+     * @param price
+     * @param inventoryCount
+     */
     public Modifier(int id, String modifierName, double price, int inventoryCount) {
         this.id = new SimpleIntegerProperty(id);
         this.modifierName = new SimpleStringProperty(modifierName);
@@ -32,6 +45,10 @@ public class Modifier implements Orderable {
         this.inventoryCount = new SimpleIntegerProperty(inventoryCount);
     }
 
+    /**
+     * The rest of the following are getters and setters for each modifier
+     * @return
+     */
     public String getModifierName() {
         return modifierName.get();
     }

@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Sebastian Oberg, Spencer Le, Roshan Tayab
+ * @author Sebastian Oberg, Spencer Le, Roshan Tayab, Grant Shields, Blake Dugan
  */
 public class DatabaseHelper {
     /**

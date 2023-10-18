@@ -1,6 +1,5 @@
 package theAlleyPOS.controller;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -75,6 +74,12 @@ public class ItemSelectionController {
     private Button btnHome;
     @FXML
     private ComboBox cmbCoupon;
+    @FXML
+    private TableView<Item> otherTable;
+    @FXML
+    private TableColumn<Item, String> cartItemColumn;
+    @FXML
+    private TableColumn<Orderable, String> otherItemColumn;
 
     private DatabaseHelper dbHelper = new DatabaseHelper();
     @FXML
@@ -180,8 +185,6 @@ public class ItemSelectionController {
 
 
     private void completeOrder() {
-        DatabaseHelper dbHelper = new DatabaseHelper();
-
         // Extract the int value from newID
         int orderId = dbHelper.getNewOrderID().get();
         LocalDateTime currentDateTime = LocalDateTime.now();
@@ -207,17 +210,38 @@ public class ItemSelectionController {
     private ObservableList<Orderable> orderedItems = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<Orderable, String> itemColumn;
-
-    @FXML
     private TableColumn<Orderable, Integer> deleteColumn;
 
     @FXML
     private void initialize() {
         orderTable.setItems(orderedItems);
         totalLabel.textProperty().bind(Bindings.format("Total: $%.2f", totalProperty));
-        itemColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        priceColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+
+        cartItemColumn.setCellValueFactory(cellData -> {
+            Orderable orderable = cellData.getValue();
+            if (orderable instanceof Item) {
+                return new SimpleStringProperty(((Item) orderable).getName());
+            } else if (orderable instanceof Modifier) {
+                return new SimpleStringProperty(((Modifier) orderable).getName());
+            }
+            return new SimpleStringProperty("");
+        });
+
+        priceColumn.setCellValueFactory(cellData -> {
+            Orderable orderable = cellData.getValue();
+            double price;
+            if (orderable instanceof Item) {
+                price = ((Item) orderable).getPrice();
+            } else if (orderable instanceof Modifier) {
+                price = ((Modifier) orderable).getPrice();
+            } else {
+                price = 0.0;
+            }
+            return new SimpleDoubleProperty(price).asObject();
+        });
+
+        initializeOtherTable();
+        fetchAndDisplayItemsFromDatabase();
 
         deleteColumn.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("Delete");
@@ -247,6 +271,29 @@ public class ItemSelectionController {
                     });
                     setGraphic(deleteButton);
                 }
+            }
+        });
+    }
+    private void fetchAndDisplayItemsFromDatabase() {
+        ObservableList<Item> items = FXCollections.observableArrayList();
+
+        // Use the fetchItems method from your DatabaseHelper class
+        List<Item> itemList = dbHelper.fetchOtherItems();
+
+        if (itemList != null && !itemList.isEmpty()) {
+            items.addAll(itemList);
+        }
+
+        otherTable.setItems(items);
+    }
+
+    private void initializeOtherTable() {
+        otherItemColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+
+        otherTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1 && otherTable.getSelectionModel().getSelectedItem() != null) {
+                Item selectedItem = otherTable.getSelectionModel().getSelectedItem();
+                addItemToOrder(selectedItem.getName());
             }
         });
     }
@@ -302,7 +349,6 @@ public class ItemSelectionController {
     }
 
     private void addItemToOrder(String itemName) {
-        DatabaseHelper dbHelper = new DatabaseHelper();
         Item item = dbHelper.getItemByName(itemName);
         if (item != null) {
             orderedItems.add(item);

@@ -34,8 +34,6 @@ public class AnalyticsController {
     @FXML
     private Button homeButton4;
     @FXML
-    private Button homeButton5;
-    @FXML
     private TableView tableViewSalesReport;
     @FXML
     private DatePicker beginDateSalesReport;
@@ -45,8 +43,7 @@ public class AnalyticsController {
     private TableView tableViewExcess;
     @FXML
     private DatePicker startDatePickerExcess;
-    @FXML
-    private TableView tableViewSeasonal;
+
     @FXML
     private TableView tableViewSalesTogether;
     @FXML
@@ -112,75 +109,3 @@ public class AnalyticsController {
         loadRestockItems();
     }
 }
-
-//    public void handleExcessReport(int begin_date){
-//        //takes in the beginning date until the current day (day 365)
-//        theAlleyPOS.DatabaseHelper dbHelper = new theAlleyPOS.DatabaseHelper();
-//        dbHelper.fetchItemsBelowInventoryCount(/*begin*.10*/); //needs beginning inventory
-//
-//        /*
-//        *** Need to add items ordered to dataset/inventory count on a given day
-//        * for each item in the database
-//        * find out how many were sold
-//        * beginning inventory = (current_inventory_count + COUNT(how many were sold))
-//        * if ((how many sold / beginning inventory) < .10 ){
-//        *   add to report
-//        * }
-//        *  */
-//        List<Item> items = new ArrayList<>();
-//        String sql = "SELECT item_name FROM items ORDER BY id";
-//        try (Connection conn = getConnection();
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             ResultSet rs = pstmt.executeQuery()) {
-//            sql = "SELECT item_name FROM items ORDER BY id";
-//            while (rs.next()) {
-//                pstmt = conn.prepareStatement(sql)
-//                //items.add(new Item(rs.getInt("id"), rs.getString("item_name"), rs.getDouble("price"), rs.getInt("inventory_count")));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        List<Item> items = new ArrayList<>();
-//        String sql = "SELECT * FROM items ORDER BY id";
-//
-//        try (Connection conn = getConnection();
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             ResultSet rs = pstmt.executeQuery()) {
-//
-//            while (rs.next()) {
-//                items.add(new Item(rs.getInt("id"), rs.getString("item_name"), rs.getDouble("price"), rs.getInt("inventory_count")));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return items;
-//    }
-//}

@@ -65,6 +65,22 @@ public class DatabaseHelper {
         return items;
     }
 
+    public List<Item> fetchOtherItems() {
+        List<Item> items = new ArrayList<>();
+        String sql = "SELECT * FROM items WHERE id > 19";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                items.add(new Item(rs.getInt("id"), rs.getString("item_name"), rs.getDouble("price"), rs.getInt("inventory_count")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+
     public void addItem(Item item) {
         String sql = "INSERT INTO items (id, item_name, price, inventory_count) VALUES (?, ?, ?, ?)";
 
@@ -239,7 +255,6 @@ public class DatabaseHelper {
             e.printStackTrace();
         }
     }
-
 }
 
 /*

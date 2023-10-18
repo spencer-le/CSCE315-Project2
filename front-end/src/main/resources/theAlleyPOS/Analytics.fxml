@@ -31,7 +31,8 @@
                            <children>
                               <DatePicker fx:id="beginDateSalesReport" prefHeight="30.0" prefWidth="150.0" promptText="Begin Date" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                               <DatePicker fx:id="endDateSalesReport" prefHeight="30.0" prefWidth="150.0" promptText="End Date" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                              <Button fx:id="homeButton1" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="30.0" prefWidth="100.0" text="Home" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                              <Button fx:id="homeButton1" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="30.0" prefWidth="100.0" text="Home" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                               <Button fx:id="btnLoadSales" mnemonicParsing="false" onAction="#handleLoadSalesClick" prefHeight="30.0" prefWidth="100.0" text="Load Sales" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                            </children>
                         </GridPane>
                             </children>

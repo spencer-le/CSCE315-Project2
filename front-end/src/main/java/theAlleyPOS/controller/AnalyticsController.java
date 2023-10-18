@@ -19,6 +19,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
+
+
 /*
 Lines 25 through 56 create the table buttons, columns, and tabs which will show the analytics
  */
@@ -28,6 +33,8 @@ public class AnalyticsController {
     public TableColumn columnItemName;
     public TableColumn columnItemAmount;
     public Button btnLoadItems;
+    @FXML
+    public Button btnLoadSales;
     @FXML
     private Button homeButton1;
     @FXML
@@ -61,6 +68,44 @@ public class AnalyticsController {
         columnItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         columnItemAmount.setCellValueFactory(new PropertyValueFactory<>("inventoryCount"));
     }
+
+    public void loadSalesReportByDate() {
+        LocalDate beginDate = beginDateSalesReport.getValue();
+        LocalDate endDate = endDateSalesReport.getValue();
+
+        if (beginDate == null || endDate == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Error: Please select both a start and an end date.");
+            alert.showAndWait();
+            return;
+        }
+
+        // convert to timestamps for query
+        // Convert LocalDate to java.util.Date
+        java.util.Date beginUtilDate = java.util.Date.from(beginDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        java.util.Date endUtilDate = java.util.Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        // Convert java.util.Date to java.sql.Timestamp
+        Timestamp beginTimestamp = new Timestamp(beginUtilDate.getTime());
+        Timestamp endTimestamp = new Timestamp(endUtilDate.getTime());
+
+        // Print LocalDate and Timestamp values
+//        System.out.println("Begin LocalDate: " + beginDate);
+//        System.out.println("End LocalDate: " + endDate);
+//        System.out.println("Begin Timestamp: " + beginTimestamp);
+//        System.out.println("End Timestamp: " + endTimestamp);
+
+//        DatabaseHelper dbHelper = new DatabaseHelper();
+//        List<Item> itemsBySales = dbHelper.itemsBySales(beginDate, endDate);
+//        ObservableList<Item> observableList = FXCollections.observableArrayList(itemsBySales);
+//        tableViewSalesReport.setItems(observableList);
+    }
+    public void handleLoadSalesClick(ActionEvent actionEvent) {
+        loadSalesReportByDate();
+    }
+
 
     /*
     The loadRestockItems function takes in a minimum number from the user, and returns all items whose inventory is

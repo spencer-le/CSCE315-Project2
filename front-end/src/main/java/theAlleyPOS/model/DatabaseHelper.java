@@ -111,8 +111,7 @@ public class DatabaseHelper {
             }
 
             myWriter_order = new FileWriter("order_year_data.csv", true);
-            myWriter_order.write("Id, customer_name, order_date, total_cost, bags, napkins\n");
-
+            myWriter_order.write("id, customer_name, order_date, total_cost\n");
             // create file for ordered_items table
             File myObj2 = new File("ordered_items_year_data.csv");
             if (myObj2.exists() && myObj2.delete()) {
@@ -126,7 +125,7 @@ public class DatabaseHelper {
             }
 
             myWriter_ordered_items = new FileWriter("ordered_items_year_data.csv", true);
-            myWriter_ordered_items.write("Id, item, modifiers\n");
+            myWriter_ordered_items.write("order_id, item_id\n");
 
 
             int order_id = 0;
@@ -180,7 +179,7 @@ public class DatabaseHelper {
 
                     order_total += drink_price; // adds total for order required in customer_loop
 
-                    myWriter_ordered_items.write(order_id + "," + drink_choice + "," + modifiers + "\n");
+                    myWriter_ordered_items.write(order_id + "," + drink_choice + "\n");
 
 
 
@@ -188,11 +187,8 @@ public class DatabaseHelper {
                 } // END OF DRINK LOOP
 
                 // remainder of customer loop is writing to file with total
-
-
-                    //write to orders csv: order_id, customer_name, order_date, order_total, bags, napkins
-                    myWriter_order.write(order_id + ",Customer " + order_id + "," + order_time + "," + order_total
-                            + "," + bag + "," + napkins + "\n");
+                    //id, customer_name, order_date, total_cost
+                    myWriter_order.write(order_id + ",Customer " + order_id + "," + order_time + "," + order_total + "\n");
 
                 customers--;
                 order_id++; //order is complete

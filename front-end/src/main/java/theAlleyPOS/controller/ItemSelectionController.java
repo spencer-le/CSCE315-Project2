@@ -23,6 +23,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Lines 30 through 86 create the buttons and boxes which will be displayed on the item selection screen, and lines 87
+through 99 initialize a database helper, table, column, price, and label variables.
+ */
 public class ItemSelectionController {
     @FXML
     private Button btnSnowStrawberryLulu;
@@ -82,9 +86,6 @@ public class ItemSelectionController {
     private TableColumn<Orderable, String> otherItemColumn;
 
     private DatabaseHelper dbHelper = new DatabaseHelper();
-    @FXML
-    private Label totalPriceLabel;
-
 
     @FXML
     private TableView<Orderable> orderTable;
@@ -97,6 +98,9 @@ public class ItemSelectionController {
     @FXML
     private Label totalLabel;
 
+    /*
+    Lines 104 through 155 use the addItemToOrder function to handle the FXML commands for when item buttons are pressed
+     */
     @FXML
     public void handleSnowStrawberryLuluClick(ActionEvent actionEvent) { addItemToOrder("Snow Strawberry Lulu"); }
 
@@ -150,6 +154,10 @@ public class ItemSelectionController {
     @FXML
     public void handleMatchaDeeriocaMilkClick(ActionEvent actionEvent) { addItemToOrder("Matcha Brown Sugar Deerioca Fresh Milk"); }
 
+
+    /*
+    Lines 161 through 181 use the function addModifierToOrder to handle the FXML commands for when item modifiers are pressed
+     */
     @FXML
     public void handlePearlsClick(ActionEvent actionEvent) {
         addModifierToOrder("Pearls");
@@ -172,6 +180,10 @@ public class ItemSelectionController {
         addModifierToOrder(selectedIceLevel);
     }
 
+    /*
+    Lines 187 through 196 call completeOrder as soon as the cash or card buttons are pressed,
+    which are determined with FXML
+     */
     @FXML
     public void handleCashClick(ActionEvent actionEvent) {
         completeOrder();
@@ -181,9 +193,12 @@ public class ItemSelectionController {
     public void handleCardClick(ActionEvent actionEvent) {
         completeOrder();
     }
-    private List<Modifier> selectedModifiers = new ArrayList<>();
+    // private List<Modifier> selectedModifiers = new ArrayList<>();
 
-
+    /*
+    The completeOrder function uses DatabaseHelper from the model folder to access and alter the database.
+    It creates a new order using the local time and total cost, and removes the ordered items from the inventory.
+     */
     private void completeOrder() {
         // Extract the int value from newID
         int orderId = dbHelper.getNewOrderID().get();
@@ -212,6 +227,10 @@ public class ItemSelectionController {
     @FXML
     private TableColumn<Orderable, Integer> deleteColumn;
 
+    /*
+    The initialize function lays out the table values for the current order, and uses the overridden updateItem
+    function to add items and modifiers to the screen as they are removed from the orderedItems list
+     */
     @FXML
     private void initialize() {
         orderTable.setItems(orderedItems);
@@ -274,6 +293,9 @@ public class ItemSelectionController {
             }
         });
     }
+    /*
+    The fetchAndDisplayItemsFromDatabase function uses the DatabaseHelper to display all items
+     */
     private void fetchAndDisplayItemsFromDatabase() {
         ObservableList<Item> items = FXCollections.observableArrayList();
 
@@ -287,6 +309,9 @@ public class ItemSelectionController {
         otherTable.setItems(items);
     }
 
+    /*
+    The initializeOtherTable function creates another temporary table to hold the current items
+     */
     private void initializeOtherTable() {
         otherItemColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
@@ -298,6 +323,10 @@ public class ItemSelectionController {
         });
     }
 
+    /*
+    The handleHomeClick function determines which time clock screen to return the user to, depending on if they are a
+    manager or employee.
+     */
     @FXML
     public void handleHomeClick(ActionEvent actionEvent) {
         if (Session.isManager())
@@ -316,6 +345,10 @@ public class ItemSelectionController {
     public void handleCouponChange(ActionEvent actionEvent) {
     }
 
+    /*
+    The loadEmployeeTimeClockScreen, and the loadManagerTimeClockScreen functions change scenes to the appropriate
+    home screen for the respective employee or manager.
+     */
     private void loadEmployeeTimeClockScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/CashierTimeClock.fxml"));
@@ -348,6 +381,10 @@ public class ItemSelectionController {
         }
     }
 
+    /*
+    The addItemToOrder function uses the DatabaseHelper class to retrieve the item and its properties from the database,
+    and updates the total price. The addModifierToOrder function under it does the same for modifiers
+     */
     private void addItemToOrder(String itemName) {
         Item item = dbHelper.getItemByName(itemName);
         if (item != null) {

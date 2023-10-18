@@ -19,6 +19,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Lines 25 through 56 create the table buttons, columns, and tabs which will show the analytics
+ */
 public class AnalyticsController {
     public TextField minimumAmountField;
     public TableColumn columnItemId;
@@ -49,6 +52,9 @@ public class AnalyticsController {
     @FXML
     private TableView tableViewRestockReport;
 
+    /*
+    This initialize function creates the columns for the table and names them
+     */
     @FXML
     public void initialize() {
         columnItemId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -56,6 +62,10 @@ public class AnalyticsController {
         columnItemAmount.setCellValueFactory(new PropertyValueFactory<>("inventoryCount"));
     }
 
+    /*
+    The loadRestockItems function takes in a minimum number from the user, and returns all items whose inventory is
+    less than this number, using a DatabaseHelper.
+     */
     public void loadRestockItems() {
         int minAmount;
         try {
@@ -82,7 +92,9 @@ public class AnalyticsController {
         tableViewRestockReport.setItems(observableList);
     }
 
-
+    /*
+    The loadManagerTimeClockScreen function changes scenes to the home screen for the current manager.
+     */
     private void loadManagerTimeClockScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/ManagerTimeClock.fxml"));
@@ -99,11 +111,17 @@ public class AnalyticsController {
         }
     }
 
+    /*
+    The handleHomeButton function uses FXML to send the user back to the home screen when the button is pressed
+     */
     @FXML
     public void handleHomeButton(ActionEvent actionEvent) {
         loadManagerTimeClockScreen(actionEvent);
     }
 
+    /*
+    The handleLoadItemsClick function also uses FXML to load the items which need to be restocked.
+     */
     @FXML
     public void handleLoadItemsClick(ActionEvent actionEvent) {
         loadRestockItems();

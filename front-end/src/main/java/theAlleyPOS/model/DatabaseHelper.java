@@ -328,6 +328,11 @@ public class DatabaseHelper {
         return frequencyMap;
     }
 
+    /**
+     * The fetchItemNamesByIds function collects item names and id s into a map
+     * @param itemIds
+     * @return itemNameById
+     */
     public Map<Integer, String> fetchItemNamesByIds(List<Integer> itemIds) {
         Map<Integer, String> itemNameById = new HashMap<>();
 
@@ -357,6 +362,11 @@ public class DatabaseHelper {
         return itemNameById;
     }
 
+    /**
+     * The fetchItemPricesByIds function collects item prices and id s into a map
+     * @param itemIds
+     * @return itemPriceById
+     */
     public Map<Integer, Double> fetchItemPricesByIds(List<Integer> itemIds) {
         Map<Integer, Double> itemPriceById = new HashMap<>();
 

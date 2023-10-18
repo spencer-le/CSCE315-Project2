@@ -15,10 +15,13 @@ import theAlleyPOS.model.Item;
 import java.io.IOException;
 import java.util.List;
 
-/*
-Lines 22 through 39 create the required buttons, table values, and text fields.
+/**
+ * @author Sebastian Oberg
  */
 public class InventoryController {
+    /**
+     * Lines 25 through 42 create the required buttons, table values, and text fields.
+     */
     public TableColumn inventoryCountColumn;
     public TextField itemCountField;
     public TextField itemIdField;
@@ -39,10 +42,10 @@ public class InventoryController {
     public TableColumn<Item, Integer> deleteColumn;
 
 
-    /*
-    This initialize function puts the correct values into each created column, along with a delete button to use when
-    removing an item from inventory. This table is synced with the database, so when it is updated, the database is too.
-    The overridden updateItem function is what does this syncing, and it uses a DatabaseHelper
+    /**
+     * This initialize function puts the correct values into each created column, along with a delete button to use when
+     * removing an item from inventory. This table is synced with the database, so when it is updated, the database is too.
+     * The overridden updateItem function is what does this syncing, and it uses a DatabaseHelper
      */
     @FXML
     private void initialize() {
@@ -87,9 +90,10 @@ public class InventoryController {
 
     }
 
-    /*
-    This handleAddItem function allows you to add new items into the database and table, given you know their name,
-    price, id, and count, using a DatabaseHelper
+    /**
+     * This handleAddItem function allows you to add new items into the database and table, given you know their name,
+     * price, id, and count, using a DatabaseHelper
+     * @param actionEvent
      */
     @FXML
     public void handleAddItem(ActionEvent actionEvent) {
@@ -109,9 +113,10 @@ public class InventoryController {
         itemCountField.clear();
     }
 
-    /*
-    This handleUpdateItem function allows you to update the price or count of the selected item in the database, using
-    a DatabaseHelper
+    /**
+     * This handleUpdateItem function allows you to update the price or count of the selected item in the database, using
+     * a DatabaseHelper
+     * @param actionEvent
      */
     @FXML
     public void handleUpdateItem(ActionEvent actionEvent) {
@@ -131,9 +136,9 @@ public class InventoryController {
         itemCountField.clear();
     }
 
-    /*
-    The refresh table function accessed the database through a DatabaseHelper and updates the table with the current
-    available items
+    /**
+     * The refresh table function accessed the database through a DatabaseHelper and updates the table with the current
+     * available items
      */
     private void refreshTable() {
         DatabaseHelper dbHelper = new DatabaseHelper();
@@ -142,17 +147,19 @@ public class InventoryController {
     }
 
 
-    /*
-    The handleHomeButton function sends the user back to the manager time clock screen.
+    /**
+     * The handleHomeButton function sends the user back to the manager time clock screen.
+     * @param actionEvent
      */
     @FXML
     public void handleHomeButton(ActionEvent actionEvent) {
         loadManagerTimeClockScreen(actionEvent);
     }
 
-    /*
-    This loadManagerTimeClockScreen function changes the current scene and stage from inventory controller to the
-    manager time clock screen using FXML
+    /**
+     * This loadManagerTimeClockScreen function changes the current scene and stage from inventory controller to the
+     * manager time clock screen using FXML
+     * @param event
      */
     private void loadManagerTimeClockScreen(ActionEvent event) {
         try {

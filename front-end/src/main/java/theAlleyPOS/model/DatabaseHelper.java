@@ -17,8 +17,14 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Sebastian Oberg, Spencer Le, Roshan Tayab
+ */
 public class DatabaseHelper {
-
+    /**
+     * Lines 28 through 34 both create variables for, and run the getConnection function, which attempts to connect to
+     * the database and throws an exception if it can't
+     */
     private static final String DB_URL = "jdbc:postgresql://csce-315-db.engr.tamu.edu/csce315331_09g_db";
     private static final String USER = "csce315_909_roshantayab";
     private static final String PASS = "password";
@@ -27,6 +33,11 @@ public class DatabaseHelper {
         return DriverManager.getConnection(DB_URL, USER, PASS);
     }
 
+    /**
+     * The validateUser function determines whether the input ID belongs to a cashier, manager, or neither.
+     * @param ID
+     * @return UserRole
+     */
     public UserRole validateUser(String ID) {
         if (isIDValid(ID, "Managers")) {
             return UserRole.MANAGER;
@@ -37,6 +48,12 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * The isIdValid function determines whether the input ID matches one in the database.
+     * @param ID
+     * @param tableName
+     * @return true or false
+     */
     private boolean isIDValid(String ID, String tableName) {
         String sql = "SELECT password FROM " + tableName + " WHERE password = ?";
 
@@ -55,6 +72,12 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * The ordersByDate function reads in orders from the database between given dates, and returns them
+     * @param beginTimestamp
+     * @param endTimestamp
+     * @return orderIds
+     */
     public List<Integer> ordersByDate(Timestamp beginTimestamp, Timestamp endTimestamp) {
         List<Integer> orderIds = new ArrayList<>();
         String sql = "SELECT id FROM Orders WHERE order_date BETWEEN ? AND ?";
@@ -76,6 +99,11 @@ public class DatabaseHelper {
         return orderIds;
     }
 
+    /**
+     * The getItemIdsByOrderIds function retrieves and returns a list of items from a junction table given the order ID.
+     * @param orderIds
+     * @return itemIds
+     */
     public List<Integer> getItemIdsByOrderIds(List<Integer> orderIds) {
         List<Integer> itemIds = new ArrayList<>();
         String sql = "SELECT item_id FROM ordered_items WHERE order_id = ?";
@@ -97,6 +125,11 @@ public class DatabaseHelper {
         return itemIds;
     }
 
+    /**
+     * The calculateItemFrequency function creates and returns an item frequency map, determined by the given item IDs.
+     * @param itemIds
+     * @return frequencyMap
+     */
     public Map<Integer, Integer> calculateItemFrequency(List<Integer> itemIds) {
         Map<Integer, Integer> frequencyMap = new HashMap<>();
 
@@ -113,7 +146,10 @@ public class DatabaseHelper {
     }
 
 
-
+    /**
+     * The fetchItems function collects all items in the database into an array for use
+     * @return items
+     */
     public List<Item> fetchItems() {
         List<Item> items = new ArrayList<>();
         String sql = "SELECT * FROM items";
@@ -129,6 +165,10 @@ public class DatabaseHelper {
         return items;
     }
 
+    /**
+     * The fetchOtherItems collects all new items that have been added (beyond the 20 original ones)
+     * @return items
+     */
     public List<Item> fetchOtherItems() {
         List<Item> items = new ArrayList<>();
         String sql = "SELECT * FROM items WHERE id > 19";
@@ -144,7 +184,10 @@ public class DatabaseHelper {
         return items;
     }
 
-
+    /**
+     * The addItem function takes in an item to add to the database, and attempts to do so using SQL.
+     * @param item
+     */
     public void addItem(Item item) {
         String sql = "INSERT INTO items (id, item_name, price, inventory_count) VALUES (?, ?, ?, ?)";
 
@@ -162,6 +205,10 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * The deleteItem function takes in an item to delete from the database, and attempts to do so using SQL.
+     * @param id
+     */
     public void deleteItem(int id) {
         String sql = "DELETE FROM items WHERE id = ?";
 
@@ -174,6 +221,10 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * The updateItemInDatabase function takes in an item to update in the database and attempts to do so using SQL.
+     * @param item
+     */
     public void updateItemInDatabase(Item item) {
         String sql = "UPDATE items SET item_name = ?, price = ?, inventory_count = ? WHERE id = ?";
 
@@ -191,6 +242,11 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * The getItemByName function attempts to find the info of an item from the database given its name, using SQL.
+     * @param itemName
+     * @return item
+     */
     public Item getItemByName(String itemName) {
         Item item = null;
         String sql = "SELECT * FROM items WHERE item_name = ?";
@@ -208,6 +264,11 @@ public class DatabaseHelper {
         return item;
     }
 
+    /**
+     * The decrementItemInventory function is called whenever an order is finalized, and it decrements the item listed,
+     * unless it is already at 0, using SQL.
+     * @param itemName
+     */
     public void decrementItemInventory(String itemName) {
         String sql = "UPDATE items SET inventory_count = inventory_count - 1 WHERE item_name = ? AND inventory_count > 0";
         try (Connection conn = getConnection();
@@ -219,6 +280,12 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * The fetchItemsBelowInventoryCount function returns all items from the database which are below a given count, using
+     * SQL.
+     * @param threshold
+     * @return items
+     */
     public List<Item> fetchItemsBelowInventoryCount(int threshold) {
         List<Item> items = new ArrayList<>();
         String sql = "SELECT * FROM items WHERE inventory_count < ?";
@@ -238,6 +305,11 @@ public class DatabaseHelper {
         return items;
     }
 
+    /**
+     * The getNewOrderID function is used to set a unique order ID for the given customer by incrementing the last order
+     *      * by one, using SQL.
+     * @return newID
+     */
     public SimpleIntegerProperty getNewOrderID() {
         String sql = "SELECT COUNT(*) FROM orders";
         SimpleIntegerProperty newID = new SimpleIntegerProperty(); // Initialize newID
@@ -256,6 +328,10 @@ public class DatabaseHelper {
         return newID;
     }
 
+    /**
+     * The fetchModifiers function returns all the available modifiers from the database using SQL.
+     * @return modifiers
+     */
     public List<Modifier> fetchModifiers() {
         List<Modifier> modifiers = new ArrayList<>();
         String sql = "SELECT * FROM MODIFIERS";
@@ -271,6 +347,11 @@ public class DatabaseHelper {
         return modifiers;
     }
 
+    /**
+     * The decrementModifierInventory function is called whenever an order is finalized, and it decrements the modifier
+     * listed, unless it is already at 0, using SQL.
+     * @param modifierName
+     */
     public void decrementModifierInventory(String modifierName) {
         String sql = "UPDATE MODIFIERS SET inventory_count = inventory_count - 1 WHERE modifier_name = ? AND inventory_count > 0";
         try (Connection conn = getConnection();
@@ -282,6 +363,11 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * The getModifierByName function attempts to find the info of a modifier from the database given its name, using SQL.
+     * @param modifierName
+     * @return modifier
+     */
     public Modifier getModifierByName(String modifierName) {
         Modifier modifier = null;
         String sql = "SELECT * FROM MODIFIERS WHERE modifier_name = ?";
@@ -299,6 +385,10 @@ public class DatabaseHelper {
         return modifier;
     }
 
+    /**
+     * The addOrder function attempts to add a given order and all its variables into the database using SQL.
+     * @param order
+     */
     public void addOrder(Order order) {
 //        INSERT INTO orders (id, customer_name, order_date, total_cost) VALUES (1, 'Spencer', '2023-10-16 14:30:00', 10.0);
         String sql = "INSERT INTO orders (id, customer_name, order_date, total_cost) VALUES (?, ?, ?, ?)";
@@ -319,6 +409,12 @@ public class DatabaseHelper {
             e.printStackTrace();
         }
     }
+
+    /**
+     * The addToOrderedItems function takes in the order and item IDs to link them in the junction table ordered_items
+     * @param order_id
+     * @param item_id
+     */
     public void addToOrderedItems(int order_id, int item_id) {
         String sql = "INSERT INTO ordered_items (order_id, item_id) VALUES (?, ?)";
 

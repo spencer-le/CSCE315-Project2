@@ -8,10 +8,14 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-/*
-Lines 15 through 26 create the buttons for the manager to use on their time clock
+
+/**
+ * @author Sebastian Oberg
  */
 public class ManagerTimeClock {
+    /**
+     * Lines 19 through 30 create the buttons for the manager to use on their time clock
+     */
     @FXML
     private Button managerClockInButton;
     @FXML
@@ -25,9 +29,10 @@ public class ManagerTimeClock {
     @FXML
     private Button managerAnalyticsButton;
 
-    /*
-    The handleClockInOut function sends the user to the item selection screen if "clock in" is chosen, and sends
-    them to the login screen if "clock out" is chosen.
+    /**
+     * The handleClockInOut function sends the user to the item selection screen if "clock in" is chosen, and sends
+     * them to the login screen if "clock out" is chosen.
+     * @param actionEvent
      */
     @FXML
     public void handleManagerClockInOut(ActionEvent actionEvent) {
@@ -47,9 +52,10 @@ public class ManagerTimeClock {
         }
     }
 
-    /*
-    The handleBreakInOut function does the same thing as the handleClockInOut function, except "break in" is used in
-    place of "clock in" and "break out" is used in the place of "clock out".
+    /**
+     * The handleBreakInOut function does the same thing as the handleClockInOut function, except "break in" is used in
+     * place of "clock in" and "break out" is used in the place of "clock out".
+     * @param actionEvent
      */
     @FXML
     public void handleManagerBreakInOut(ActionEvent actionEvent) {
@@ -69,24 +75,27 @@ public class ManagerTimeClock {
         }
     }
 
-    /*
-    The handleManagerInventoryAction function sends the user to the inventory screen
+    /**
+     * The handleManagerInventoryAction function sends the user to the inventory screen
+     * @param actionEvent
      */
     @FXML
     public void handleManagerInventoryAction(ActionEvent actionEvent) {
         loadInventoryScreen(actionEvent);
     }
 
-    /*
-    The handleManagerAnalyticsAction function sends the user to the analytics screen
+    /**
+     * The handleManagerAnalyticsAction function sends the user to the analytics screen
+     * @param actionEvent
      */
     @FXML
     public void handleManagerAnalyticsAction(ActionEvent actionEvent) {
         loadAnalyticsScreen(actionEvent);
     }
 
-    /*
-    The loadLoginScreen function changes the FXML scene and stage to that of the login screen.
+    /**
+     * The loadLoginScreen function changes the FXML scene and stage to that of the login screen.
+     * @param event
      */
     private void loadLoginScreen(ActionEvent event) {
         try {
@@ -103,8 +112,9 @@ public class ManagerTimeClock {
             e.printStackTrace();
         }
     }
-    /*
-    The loadAnalyticsScreen function also uses FXML to change stages and scenes to the analytics screen
+    /**
+     * The loadAnalyticsScreen function also uses FXML to change stages and scenes to the analytics screen
+     * @param event
      */
     private void loadAnalyticsScreen(ActionEvent event) {
         try {
@@ -122,8 +132,9 @@ public class ManagerTimeClock {
         }
     }
 
-    /*
-    The loadItemSelectionScreen function also uses FXML to change stages and scenes to the item selection screen
+    /**
+     * The loadItemSelectionScreen function also uses FXML to change stages and scenes to the item selection screen
+     * @param event
      */
     private void loadItemSelectionScreen(ActionEvent event) {
         try {
@@ -140,8 +151,9 @@ public class ManagerTimeClock {
             e.printStackTrace();
         }
     }
-    /*
-    The loadInventoryScreen function also uses FXML to change stages and scenes to the inventory screen
+    /**
+     * The loadInventoryScreen function also uses FXML to change stages and scenes to the inventory screen
+     * @param event
      */
     private void loadInventoryScreen(ActionEvent event) {
         try {

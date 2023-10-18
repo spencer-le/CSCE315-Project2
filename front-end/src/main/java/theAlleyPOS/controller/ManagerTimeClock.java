@@ -8,7 +8,9 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/*
+Lines 15 through 26 create the buttons for the manager to use on their time clock
+ */
 public class ManagerTimeClock {
     @FXML
     private Button managerClockInButton;
@@ -23,6 +25,10 @@ public class ManagerTimeClock {
     @FXML
     private Button managerAnalyticsButton;
 
+    /*
+    The handleClockInOut function sends the user to the item selection screen if "clock in" is chosen, and sends
+    them to the login screen if "clock out" is chosen.
+     */
     @FXML
     public void handleManagerClockInOut(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getSource();
@@ -41,6 +47,10 @@ public class ManagerTimeClock {
         }
     }
 
+    /*
+    The handleBreakInOut function does the same thing as the handleClockInOut function, except "break in" is used in
+    place of "clock in" and "break out" is used in the place of "clock out".
+     */
     @FXML
     public void handleManagerBreakInOut(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getSource();
@@ -59,16 +69,25 @@ public class ManagerTimeClock {
         }
     }
 
+    /*
+    The handleManagerInventoryAction function sends the user to the inventory screen
+     */
     @FXML
     public void handleManagerInventoryAction(ActionEvent actionEvent) {
         loadInventoryScreen(actionEvent);
     }
 
+    /*
+    The handleManagerAnalyticsAction function sends the user to the analytics screen
+     */
     @FXML
     public void handleManagerAnalyticsAction(ActionEvent actionEvent) {
         loadAnalyticsScreen(actionEvent);
     }
 
+    /*
+    The loadLoginScreen function changes the FXML scene and stage to that of the login screen.
+     */
     private void loadLoginScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/Login.fxml"));
@@ -84,7 +103,9 @@ public class ManagerTimeClock {
             e.printStackTrace();
         }
     }
-
+    /*
+    The loadAnalyticsScreen function also uses FXML to change stages and scenes to the analytics screen
+     */
     private void loadAnalyticsScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/Analytics.fxml"));
@@ -101,6 +122,9 @@ public class ManagerTimeClock {
         }
     }
 
+    /*
+    The loadItemSelectionScreen function also uses FXML to change stages and scenes to the item selection screen
+     */
     private void loadItemSelectionScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/ItemSelection.fxml"));
@@ -116,7 +140,9 @@ public class ManagerTimeClock {
             e.printStackTrace();
         }
     }
-
+    /*
+    The loadInventoryScreen function also uses FXML to change stages and scenes to the inventory screen
+     */
     private void loadInventoryScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/Inventory.fxml"));

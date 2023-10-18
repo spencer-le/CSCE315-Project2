@@ -22,7 +22,7 @@ import java.util.List;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
-
+import java.util.Map;
 
 /*
 Lines 25 through 56 create the table buttons, columns, and tabs which will show the analytics
@@ -111,8 +111,8 @@ public class AnalyticsController {
         }
 
         //TODO: using item IDs, sum up total sales
-//        List<Item> itemsBySales = dbHelper.itemsBySales(beginDate, endDate);
-//        ObservableList<Item> observableList = FXCollections.observableArrayList(itemsBySales);
+        Map<Integer, Integer> frequency = dbHelper.calculateItemFrequency(itemIds);
+
 //        tableViewSalesReport.setItems(observableList);
     }
     public void handleLoadSalesClick(ActionEvent actionEvent) {

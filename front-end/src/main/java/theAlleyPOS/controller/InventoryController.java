@@ -15,6 +15,9 @@ import theAlleyPOS.model.Item;
 import java.io.IOException;
 import java.util.List;
 
+/*
+Lines 22 through 39 create the required buttons, table values, and text fields.
+ */
 public class InventoryController {
     public TableColumn inventoryCountColumn;
     public TextField itemCountField;
@@ -36,6 +39,11 @@ public class InventoryController {
     public TableColumn<Item, Integer> deleteColumn;
 
 
+    /*
+    This initialize function puts the correct values into each created column, along with a delete button to use when
+    removing an item from inventory. This table is synced with the database, so when it is updated, the database is too.
+    The overridden updateItem function is what does this syncing, and it uses a DatabaseHelper
+     */
     @FXML
     private void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<Item, Integer>("id"));
@@ -79,6 +87,10 @@ public class InventoryController {
 
     }
 
+    /*
+    This handleAddItem function allows you to add new items into the database and table, given you know their name,
+    price, id, and count, using a DatabaseHelper
+     */
     @FXML
     public void handleAddItem(ActionEvent actionEvent) {
         int itemId = Integer.parseInt(itemIdField.getText());
@@ -97,6 +109,10 @@ public class InventoryController {
         itemCountField.clear();
     }
 
+    /*
+    This handleUpdateItem function allows you to update the price or count of the selected item in the database, using
+    a DatabaseHelper
+     */
     @FXML
     public void handleUpdateItem(ActionEvent actionEvent) {
         int itemId = Integer.parseInt(itemIdField.getText());
@@ -115,6 +131,10 @@ public class InventoryController {
         itemCountField.clear();
     }
 
+    /*
+    The refresh table function accessed the database through a DatabaseHelper and updates the table with the current
+    available items
+     */
     private void refreshTable() {
         DatabaseHelper dbHelper = new DatabaseHelper();
         ObservableList<Item> items = FXCollections.observableArrayList(dbHelper.fetchItems());
@@ -122,11 +142,18 @@ public class InventoryController {
     }
 
 
+    /*
+    The handleHomeButton function sends the user back to the manager time clock screen.
+     */
     @FXML
     public void handleHomeButton(ActionEvent actionEvent) {
         loadManagerTimeClockScreen(actionEvent);
     }
 
+    /*
+    This loadManagerTimeClockScreen function changes the current scene and stage from inventory controller to the
+    manager time clock screen using FXML
+     */
     private void loadManagerTimeClockScreen(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/theAlleyPOS/ManagerTimeClock.fxml"));

@@ -23,6 +23,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Map;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /*
 Lines 25 through 56 create the table buttons, columns, and tabs which will show the analytics
@@ -89,31 +90,33 @@ public class AnalyticsController {
         java.util.Date endUtilDate = java.util.Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         // Convert java.util.Date to java.sql.Timestamp
-//        Timestamp beginTimestamp = new Timestamp(beginUtilDate.getTime());
-//        Timestamp endTimestamp = new Timestamp(endUtilDate.getTime());
+        Timestamp beginTimestamp = new Timestamp(beginUtilDate.getTime());
+        Timestamp endTimestamp = new Timestamp(endUtilDate.getTime());
 
-        Timestamp beginTimestamp = Timestamp.valueOf("2023-10-17 17:00:00"); // Replace with your desired start timestamp
-        Timestamp endTimestamp = Timestamp.valueOf("2023-10-17 21:09:15.31785");
-
-        // Print LocalDate and Timestamp values
-//        System.out.println("Begin LocalDate: " + beginDate);
-//        System.out.println("End LocalDate: " + endDate);
-//        System.out.println("Begin Timestamp: " + beginTimestamp);
-//        System.out.println("End Timestamp: " + endTimestamp);
 
         DatabaseHelper dbHelper = new DatabaseHelper();
         List<Integer> ordersByDate = dbHelper.ordersByDate(beginTimestamp, endTimestamp);
 
-        //TODO: go through order_items table, get list of item IDs
+        // go through order_items table, get list of item IDs
         List<Integer> itemIds = dbHelper.getItemIdsByOrderIds(ordersByDate);
-        for (Integer orderId : itemIds) {
-            System.out.println("Order ID: " + orderId);
-        }
+
 
         //TODO: using item IDs, sum up total sales
         Map<Integer, Integer> frequency = dbHelper.calculateItemFrequency(itemIds);
+        // Setting up the columns for tableViewSalesReport
+        TableColumn<Map.Entry<Integer, Integer>, Integer> itemIdColumn = new TableColumn<>("Item ID");
+        itemIdColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getKey()).asObject());
 
-//        tableViewSalesReport.setItems(observableList);
+        TableColumn<Map.Entry<Integer, Integer>, Integer> frequencyColumn = new TableColumn<>("Frequency");
+        frequencyColumn.setCellValueFactory(p -> new SimpleIntegerProperty(p.getValue().getValue()).asObject());
+
+        tableViewSalesReport.getColumns().setAll(itemIdColumn, frequencyColumn);
+
+        // Convert the frequencyMap to an ObservableList and set it to tableViewSalesReport
+        ObservableList<Map.Entry<Integer, Integer>> data = FXCollections.observableArrayList(frequency.entrySet());
+        tableViewSalesReport.setItems(data);
+
+
     }
     public void handleLoadSalesClick(ActionEvent actionEvent) {
         loadSalesReportByDate();

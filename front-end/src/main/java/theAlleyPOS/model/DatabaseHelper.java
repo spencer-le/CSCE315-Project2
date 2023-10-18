@@ -12,8 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
-//import java.time.LocalDate;
-//import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,11 +100,6 @@ public class DatabaseHelper {
 
         for (Integer itemId : itemIds) {
             frequencyMap.put(itemId, frequencyMap.getOrDefault(itemId, 0) + 1);
-        }
-
-        // Printing the frequency of each item
-        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
-            System.out.println("Item ID: " + entry.getKey() + ", Frequency: " + entry.getValue());
         }
 
         return frequencyMap;

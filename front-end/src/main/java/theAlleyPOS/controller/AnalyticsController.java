@@ -12,14 +12,11 @@ import javafx.stage.Stage;
 import theAlleyPOS.model.Item;
 import theAlleyPOS.DatabaseHelper;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Map;
@@ -125,6 +122,13 @@ public class AnalyticsController {
         loadSalesReportByDate();
     }
 
+    public void loadExcessReport(Timestamp beginning_date){
+        double threshhold;
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+        List<Integer> orders = dbHelper.ordersByDate(beginning_date, now);
+
+    }
 
     /**
      * The loadRestockItems function takes in a minimum number from the user, and returns all items whose inventory is

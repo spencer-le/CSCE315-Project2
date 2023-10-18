@@ -255,6 +255,18 @@ public class DatabaseHelper {
             e.printStackTrace();
         }
     }
+    public void addToOrderedItems(int order_id, int item_id) {
+        String sql = "INSERT INTO ordered_items (order_id, item_id) VALUES (?, ?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, order_id);
+            pstmt.setInt(2, item_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 /*

@@ -213,6 +213,7 @@ public class ItemSelectionController {
         for (Orderable orderable : orderedItems) {
             if (orderable instanceof Item) {
                 dbHelper.decrementItemInventory(orderable.getName());
+                dbHelper.addToOrderedItems(newOrder.getId(), ((Item) orderable).getId());
             } else if (orderable instanceof Modifier) {
                 dbHelper.decrementModifierInventory(orderable.getName());
             }

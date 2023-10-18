@@ -116,13 +116,13 @@ public class DatabaseHelper {
         }
 
         try { //create file for ordered_items table
-            File myObj = new File("ordered_items_year_data.csv");
-            if (myObj.exists() && myObj.delete()) {
-                System.out.println("File deleted: " + myObj.getName());
+            File myObj2 = new File("ordered_items_year_data.csv");
+            if (myObj2.exists() && myObj2.delete()) {
+                System.out.println("File deleted: " + myObj2.getName());
             }
 
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
+            if (myObj2.createNewFile()) {
+                System.out.println("File created: " + myObj2.getName());
             } else {
                 System.out.println("Failed to create file");
             }

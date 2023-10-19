@@ -284,19 +284,14 @@ public class AnalyticsController {
         // if the item is NOT in excess, remove it
 
         ExcessItems.removeIf(item -> !dbHelper.inExcessSinceDate(beginning_date_timestamp, item.getId()));
-//        for (Item item : ExcessItems) {
-//            System.out.println("Item ID: " + item.getId());
-//        }
+
         TableColumn<Item, Integer> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<Item, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        TableColumn<Item, Integer> quantityColumn = new TableColumn<>("Quantity");
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-
-        tableViewExcess.getColumns().addAll(idColumn, nameColumn, quantityColumn);
+        tableViewExcess.getColumns().addAll(idColumn, nameColumn);
         ObservableList<Item> observableList = FXCollections.observableArrayList(ExcessItems);
         tableViewExcess.setItems(observableList);
     }

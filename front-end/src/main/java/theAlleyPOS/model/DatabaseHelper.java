@@ -673,6 +673,47 @@ public class DatabaseHelper {
             e.printStackTrace();
         }
     }
+    public Integer getInventoryById(int item_id){
+        String sql = "SELECT inventory_count FROM items WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, item_id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+    public Boolean inExcessSinceDate(Timestamp begin, int item_id){
+
+        String sql = "SELECT COUNT(ordered_items.item_id) FROM ordered_items " +
+                "INNER JOIN orders ON ordered_items.order_id = orders.id WHERE " +
+                "ordered_items.item_id = ? AND orders.order_date >= ?;";
+        //the function above grabs the sold items since a given date
+        int current_inventory = getInventoryById(item_id);
+        int previous_inventory = current_inventory;
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, item_id);
+            pstmt.setTimestamp(2, begin);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    previous_inventory += rs.getInt(1); //now prev = current + sales
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if((current_inventory - previous_inventory) < previous_inventory * .1){
+            return true; //item is in excess if it has sold less than 10% of its inventory
+        }else{
+            return false;
+        }
+    }
     public String getItemNamebyID(int id) {
         String itemName = null;
         String sql = "SELECT item_name FROM your_table_name WHERE id = ?";

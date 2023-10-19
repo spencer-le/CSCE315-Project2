@@ -49,6 +49,8 @@ public class AnalyticsController {
     @FXML
     private Button homeButton4;
     @FXML
+    private Button btnLoadExcess;
+    @FXML
     private TableView tableViewSalesReport;
     @FXML
     private DatePicker beginDateSalesReport;
@@ -261,4 +263,29 @@ public class AnalyticsController {
     public void handleLoadItemsClick(ActionEvent actionEvent) {
         loadRestockItems();
     }
+    @FXML
+    private void handleLoadExcessClick(ActionEvent event) {
+        loadExcessReport();
+    }
+    @FXML
+    public void loadExcessReport(){
+        LocalDate beginning_date = startDatePickerExcess.getValue();
+        if (beginning_date == null ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Error: Please select both a valid start date");
+            alert.showAndWait();
+            return;
+        }
+        Timestamp beginning_date_timestamp = Timestamp.valueOf(beginning_date.atStartOfDay());
+        DatabaseHelper dbHelper = new DatabaseHelper();
+        List<Item> ExcessItems = dbHelper.fetchItems();
+        // if the item is NOT in excess, remove it
+        ExcessItems.removeIf(item -> !dbHelper.inExcessSinceDate(beginning_date_timestamp, item.getId()));
+        ObservableList<Item> observableList = FXCollections.observableArrayList(ExcessItems);
+        tableViewExcess.setItems(observableList);
+    }
+
+
 }

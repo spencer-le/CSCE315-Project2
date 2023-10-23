@@ -41,4 +41,3 @@ Here, users can review their selections:
 1. **See Selected Items**: All added items, along with their modifiers, are listed here.
 2. **Remove Items/Modifiers**: If a mistake is made or an item is no longer desired, it can easily be removed from the cart.
 3. **Finalize Purchase**: Once satisfied, users can move on to the payment and check-out process.
-o replace the placeholders ([...]) with your actual values. Also, you might want to add more details, screenshots, or any other information that can help users understand or contributors to help develop your project further.
